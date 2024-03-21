@@ -11,7 +11,8 @@ export const show = (...args: unknown[]) => console.log(...args);
 export const welcome = () =>
   show(chalk`
 {blue ======================================================}
-👋 {bold {green Welcome to Near!}} Learn more: https://docs.near.org/
+👋 {bold {green Welcome to Urbit's Create Near App! Learn more at docs.urbit.org
+}} Learn more: https://docs.near.org/
 🔧 Let's get your project ready.
 {blue ======================================================}
 (${trackingMessage})`);
@@ -19,7 +20,7 @@ export const welcome = () =>
 export const setupFailed = () =>
   show(chalk`{bold {red ==========================================}}
 {red ⛔️ There was a problem during the project setup}.
-Please refer to https://github.com/near/create-near-app README to troubleshoot.
+Please refer to https://github.com/urbit/create-near-app README to troubleshoot.
 Notice: some platforms aren't supported (yet).
 {bold {red ==========================================}}`);
 
