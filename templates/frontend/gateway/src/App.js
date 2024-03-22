@@ -3,7 +3,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css'
 import 'bootstrap/dist/js/bootstrap.bundle'
 import 'error-polyfill'
 import { useInitNear } from 'near-social-vm'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css'
 import 'react-bootstrap-typeahead/css/Typeahead.css'
 import {
@@ -27,37 +27,8 @@ function App(props) {
       })
   }, [initNear])
 
-  const [redirectMap, setRedirectMap] = useState(null)
-
-  useEffect(() => {
-    const fetchRedirectMap = async () => {
-      try {
-        const localStorageFlags = JSON.parse(
-          localStorage.getItem('flags') || '{}'
-        )
-        let redirectMapData
-
-        if (localStorageFlags.bosLoaderUrl) {
-          const response = await fetch(localStorageFlags.bosLoaderUrl)
-          const data = await response.json()
-          redirectMapData = data.components
-        } else {
-          console.log('sessionStorage', sessionStorage)
-          redirectMapData = JSON.parse(
-            sessionStorage.getItem(SESSION_STORAGE_REDIRECT_MAP_KEY) || '{}'
-          )
-        }
-        setRedirectMap(redirectMapData)
-      } catch (error) {
-        console.error('Error fetching redirect map:', error)
-      }
-    }
-    fetchRedirectMap()
-  }, [])
-
   const passProps = {
     refreshAllowance: () => refreshAllowance(),
-    redirectMap,
     widgets: Widgets
   }
 
