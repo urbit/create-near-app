@@ -88,7 +88,7 @@ Exiting now.`);
 export const directoryExists = (dirName: string) =>
   show(chalk`{red This directory already exists! ${dirName}}`);
 
-export const creatingApp = () => show(chalk`\nCreating a new {bold NEAR dApp}`);
+export const creatingApp = () => show(chalk`\nCreating a new {bold Urbit's NEAR dApp}`);
 
 export const depsInstall = () =>
   show(chalk`

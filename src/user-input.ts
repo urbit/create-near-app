@@ -32,7 +32,7 @@ const namePrompts: PromptObject = {
   type: 'text',
   name: 'projectName',
   message: 'Name your project (we will create a directory with that name)',
-  initial: 'hello-near',
+  initial: 'hello-urbit',
 };
 
 const npmPrompt: PromptObject = {

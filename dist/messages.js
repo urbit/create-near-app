@@ -13,8 +13,8 @@ const show = (...args) => console.log(...args);
 exports.show = show;
 const welcome = () => (0, exports.show)((0, chalk_1.default) `
 {blue ======================================================}
-👋 {bold {green Welcome to Urbit's Create Near App! Learn more at docs.urbit.org
-}} Learn more: https://docs.near.org/
+👋 {bold {green Welcome to Urbit's Create Near App! Learn more at https://docs.urbit.org/
+}} Learn more: https://docs.urbit.org/
 🔧 Let's get your project ready.
 {blue ======================================================}
 (${tracking_1.trackingMessage})`);
