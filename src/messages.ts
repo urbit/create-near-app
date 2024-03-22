@@ -11,8 +11,8 @@ export const show = (...args: unknown[]) => console.log(...args);
 export const welcome = () =>
   show(chalk`
 {blue ======================================================}
-👋 {bold {green Welcome to Urbit's Create Near App! Learn more at docs.urbit.org
-}} Learn more: https://docs.near.org/
+👋 {bold {green Welcome to Urbit's Create Near App! Learn more at https://docs.urbit.org/
+}} Learn more: https://docs.urbit.org/
 🔧 Let's get your project ready.
 {blue ======================================================}
 (${trackingMessage})`);
