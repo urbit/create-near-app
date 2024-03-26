@@ -3,7 +3,7 @@ import { Widget } from 'near-social-vm'
 import { Widgets } from '../data/widgets'
 import newComponents from '../../build/data.json'
 
-//  hosts locally build VM components
+//  hosts locally built VM components
 const header = newComponents['account.Urbit/widget/components.header']
 const UrbitWidget = newComponents['account.Urbit/widget/components.UrbitWidget']
 
