@@ -3,16 +3,16 @@ import { Widget } from 'near-social-vm'
 import { Widgets } from '../data/widgets'
 import newComponents from '../../build/data.json'
 
-//  hosts locally build VM components
+//  hosts locally built VM components
 const header = newComponents['account.Urbit/widget/components.header']
 const UrbitWidget = newComponents['account.Urbit/widget/components.UrbitWidget']
 
-function Urbit({ redirectMap }) {
+function Urbit() {
   const socialComponents = Widgets
 
   return (
     <div>
-      <Widget src={socialComponents.UrbitHeader} config={{ redirectMap }} />
+      <Widget src={socialComponents.UrbitHeader} />
       <Widget
         code={UrbitWidget.code}
         props={{
@@ -20,7 +20,6 @@ function Urbit({ redirectMap }) {
           host: 'http://localhost:80',
           code: 'lidlut-tabwed-pillex-ridrup'
         }}
-        config={{ redirectMap }}
       />
     </div>
   )

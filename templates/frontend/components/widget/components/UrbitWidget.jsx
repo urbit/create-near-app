@@ -1,6 +1,6 @@
 //  Below you can find /widget/components.helloUrbit
-//  To build test component ran "npm run component-build"
-//  You can look for thurther testing instructions in src/app/hello-components/page.js
+//  To build test component run "npm run component-build"
+//  You can look for further testing instructions in src/app/hello-components/page.js
 
 const Label = styled.span`
   font-size: 16px;
@@ -68,10 +68,10 @@ const [pokeVal, setPokeVal] = useState('');
 const [app, setApp] = useState('')
 const [path, setPath] = useState('')
 
-//Urbit.ship - connects component to your ship, for testing perpouses set up to 'zod'
-Urbit.ship(`{props.ship}`)  
+//Urbit.ship - connects component to your ship. For testing purposes set up to 'zod'
+Urbit.ship(`${props.ship}`)  
 //Urbit.setTestApi - setting up UrbitAPI for fakeship, not needed if runs on ship
-Urbit.setTestApi(`{props.host}`, `{props.code}`)
+Urbit.setTestApi(`${props.host}`, `${props.code}`)
 
 
 const handlePoke = () => {
@@ -85,7 +85,7 @@ const scryTo = (e) => {
     e.preventDefault();
     Urbit.scryUrbit(app, path)
     .then((res) => {
-      setResponse(res);
+      setResponse(JSON.stringify(res));
     });
   }
 

@@ -11,7 +11,8 @@ export const show = (...args: unknown[]) => console.log(...args);
 export const welcome = () =>
   show(chalk`
 {blue ======================================================}
-👋 {bold {green Welcome to Near!}} Learn more: https://docs.near.org/
+👋 {bold {green Welcome to Urbit's Create Near App! Learn more at https://docs.urbit.org/
+}} Learn more: https://docs.urbit.org/
 🔧 Let's get your project ready.
 {blue ======================================================}
 (${trackingMessage})`);
@@ -19,7 +20,7 @@ export const welcome = () =>
 export const setupFailed = () =>
   show(chalk`{bold {red ==========================================}}
 {red ⛔️ There was a problem during the project setup}.
-Please refer to https://github.com/near/create-near-app README to troubleshoot.
+Please refer to https://github.com/urbit/create-near-app README to troubleshoot.
 Notice: some platforms aren't supported (yet).
 {bold {red ==========================================}}`);
 
@@ -87,7 +88,7 @@ Exiting now.`);
 export const directoryExists = (dirName: string) =>
   show(chalk`{red This directory already exists! ${dirName}}`);
 
-export const creatingApp = () => show(chalk`\nCreating a new {bold NEAR dApp}`);
+export const creatingApp = () => show(chalk`\nCreating a new {bold Urbit's NEAR dApp}`);
 
 export const depsInstall = () =>
   show(chalk`
