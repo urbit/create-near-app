@@ -65,7 +65,7 @@ Exiting now.`);
 exports.windowsWarning = windowsWarning;
 const directoryExists = (dirName) => (0, exports.show)((0, chalk_1.default) `{red This directory already exists! ${dirName}}`);
 exports.directoryExists = directoryExists;
-const creatingApp = () => (0, exports.show)((0, chalk_1.default) `\nCreating a new {bold NEAR dApp}`);
+const creatingApp = () => (0, exports.show)((0, chalk_1.default) `\nCreating a new {bold Urbit's NEAR dApp}`);
 exports.creatingApp = creatingApp;
 const depsInstall = () => (0, exports.show)((0, chalk_1.default) `
 {green Installing dependencies in a few folders, this might take a while.}
