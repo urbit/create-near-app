@@ -10,6 +10,7 @@
     "bootstrap": "^5.2.1",
     "bootstrap-icons": "^1.9.0",
     "bos-workspace": "github:urbit/bos-workspace",
+    "chalk": "^5.3.0",
     "dompurify": "^3.0.6",
     "error-polyfill": "^0.1.2",
     "near-api-js": "^2.1.3",
