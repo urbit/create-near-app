@@ -17,7 +17,7 @@ function Urbit() {
         code={UrbitWidget.code}
         props={{
           ship: 'zod',
-          host: 'http://localhost:80',
+          host: 'http://localhost:8080',
           code: 'lidlut-tabwed-pillex-ridrup'
         }}
       />
