@@ -12,7 +12,6 @@ import {
   BrowserRouter as Router,
   Switch
 } from 'react-router-dom'
-import { NetworkId, Widgets } from './data/widgets'
 import Urbit from './pages/Urbit'
 
 export const refreshAllowanceObj = {}
@@ -23,13 +22,12 @@ function App(props) {
   useEffect(() => {
     initNear &&
       initNear({
-        networkId: NetworkId
+        networkId: 'testnet'
       })
   }, [initNear])
 
   const passProps = {
-    refreshAllowance: () => refreshAllowance(),
-    widgets: Widgets
+    refreshAllowance: () => refreshAllowance()
   }
 
   let str = window.location.pathname
