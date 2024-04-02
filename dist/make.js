@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.runDepsInstall = exports.copyDir = exports.createProject = void 0;
+exports.runDepGitIgnore = exports.runDepsInstall = exports.copyDir = exports.createProject = void 0;
 const show = __importStar(require("./messages"));
 const cross_spawn_1 = __importDefault(require("cross-spawn"));
 const fs_1 = __importDefault(require("fs"));
@@ -58,6 +58,7 @@ function copyDir(source, dest) {
 exports.copyDir = copyDir;
 async function runDepsInstall(projectPath) {
     show.depsInstall();
+    //CHANGED TO PNPM
     await new Promise((resolve, reject) => (0, cross_spawn_1.default)('npm', ['install'], {
         cwd: projectPath,
         stdio: 'inherit',
@@ -72,4 +73,27 @@ async function runDepsInstall(projectPath) {
     }));
 }
 exports.runDepsInstall = runDepsInstall;
+async function runDepGitIgnore(projectPath) {
+    return new Promise((resolve, reject) => {
+        const gitIgnoreFileContent = `# Node dependencies
+/node_modules
+
+# production
+/build
+/dist
+
+#mist
+.env
+`;
+        fs_1.default.writeFile(path_1.default.join(projectPath, '.gitignore'), gitIgnoreFileContent, (err) => {
+            if (err) {
+                reject(err);
+            }
+            else {
+                resolve();
+            }
+        });
+    });
+}
+exports.runDepGitIgnore = runDepGitIgnore;
 //# sourceMappingURL=make.js.map
