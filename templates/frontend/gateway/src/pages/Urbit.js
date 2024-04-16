@@ -21,9 +21,9 @@ function Urbit() {
         // src = {UrbitWidgetTestnet}
         code={UrbitWidget.code}
         props={{
-          ship: 'zod',
-          host: 'http://localhost:8080',
-          code: 'lidlut-tabwed-pillex-ridrup'
+          ship: process.env.REACT_APP_FAKE_SHIP,
+          host: process.env.REACT_APP_HOST,
+          code: process.env.REACT_APP_FAKE_CODE
         }}
       />
     </div>

@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.depsInstallError = exports.depsInstall = exports.creatingApp = exports.directoryExists = exports.windowsWarning = exports.unsupportedNodeVersion = exports.argsError = exports.gatewayInstructions = exports.setupSuccess = exports.successFrontendToText = exports.setupFailed = exports.welcome = exports.show = void 0;
 const chalk_1 = __importDefault(require("chalk"));
-const tracking_1 = require("./tracking");
 if (process.env.NEAR_NO_COLOR) {
     chalk_1.default.level = 0;
 }
@@ -16,8 +15,7 @@ const welcome = () => (0, exports.show)((0, chalk_1.default) `
 👋 {bold {green Welcome to Urbit's Create Near App! Learn more at https://docs.urbit.org/
 }} 
 🔧 Let's get your project ready.
-{blue ======================================================}
-(${tracking_1.trackingMessage})`);
+{blue ======================================================}`);
 exports.welcome = welcome;
 const setupFailed = () => (0, exports.show)((0, chalk_1.default) `{bold {red ==========================================}}
 {red ⛔️ There was a problem during the project setup}.
@@ -54,8 +52,8 @@ ${!install
 exports.gatewayInstructions = gatewayInstructions;
 const argsError = (msg) => (0, exports.show)((0, chalk_1.default) `{red Arguments error: {white ${msg}}}
 
-Run {blue npx create-near-app} without arguments, or use:
-npx create-near-app <projectName> [--frontend next|vanilla|none] [--contract rs|ts|none --tests rs|ts|none]`);
+Run {blue npx urbit/create-near-app} without arguments, or use:
+npx urbit/create-near-app <projectName> `);
 exports.argsError = argsError;
 const unsupportedNodeVersion = (supported) => (0, exports.show)((0, chalk_1.default) `{red We support node.js version ${supported} or later}`);
 exports.unsupportedNodeVersion = unsupportedNodeVersion;

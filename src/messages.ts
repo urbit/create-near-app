@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import { trackingMessage } from './tracking';
 import { Frontend, FrontendMessage, ProjectName } from './types';
 
 if (process.env.NEAR_NO_COLOR) {
@@ -14,8 +13,7 @@ export const welcome = () =>
 👋 {bold {green Welcome to Urbit's Create Near App! Learn more at https://docs.urbit.org/
 }} 
 🔧 Let's get your project ready.
-{blue ======================================================}
-(${trackingMessage})`);
+{blue ======================================================}`);
 
 export const setupFailed = () =>
   show(chalk`{bold {red ==========================================}}
@@ -74,8 +72,8 @@ ${
 export const argsError = (msg: string) =>
   show(chalk`{red Arguments error: {white ${msg}}}
 
-Run {blue npx create-near-app} without arguments, or use:
-npx create-near-app <projectName> [--frontend next|vanilla|none] [--contract rs|ts|none --tests rs|ts|none]`);
+Run {blue npx urbit/create-near-app} without arguments, or use:
+npx urbit/create-near-app <projectName> `);
 
 export const unsupportedNodeVersion = (supported: string) =>
   show(chalk`{red We support node.js version ${supported} or later}`);
