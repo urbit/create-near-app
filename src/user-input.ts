@@ -1,6 +1,4 @@
 import {
-  // App,
-  // Frontend,
   FRONTENDS,
   ProjectName,
   UserConfig
