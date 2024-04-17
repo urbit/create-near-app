@@ -1,7 +1,7 @@
 {
   "name": "create-near-app",
   "version": "6.3.1",
-  "description": "Quickly scaffold your dApp on NEAR Blockchain",
+  "description": "Quickly scaffold your Urbit's dApp on NEAR Blockchain",
   "main": "index.js",
   "engines": {
     "node": ">=16"
@@ -60,7 +60,7 @@
   },
   "repository": "https://github.com/near/create-near-app.git",
   "author": "Pagoda.co",
-  "bugs": "https://github.com/near/create-near-app/issues",
+  "bugs": "https://github.com/urbit/create-near-app/issues",
   "license": "(MIT AND Apache-2.0)",
   "keywords": [
     "nearprotocol",
