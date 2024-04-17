@@ -5,7 +5,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.depsInstallError = exports.depsInstall = exports.creatingApp = exports.directoryExists = exports.windowsWarning = exports.unsupportedNodeVersion = exports.argsError = exports.gatewayInstructions = exports.setupSuccess = exports.successFrontendToText = exports.setupFailed = exports.welcome = exports.show = void 0;
 const chalk_1 = __importDefault(require("chalk"));
-const tracking_1 = require("./tracking");
 if (process.env.NEAR_NO_COLOR) {
     chalk_1.default.level = 0;
 }
@@ -16,8 +15,7 @@ const welcome = () => (0, exports.show)((0, chalk_1.default) `
 👋 {bold {green Welcome to Urbit's Create Near App! Learn more at https://docs.urbit.org/
 }} Learn more: https://docs.urbit.org/
 🔧 Let's get your project ready.
-{blue ======================================================}
-(${tracking_1.trackingMessage})`);
+{blue ======================================================}`);
 exports.welcome = welcome;
 const setupFailed = () => (0, exports.show)((0, chalk_1.default) `{bold {red ==========================================}}
 {red ⛔️ There was a problem during the project setup}.
@@ -35,7 +33,7 @@ const successFrontendToText = (frontend) => frontend === 'none'
 exports.successFrontendToText = successFrontendToText;
 const setupSuccess = (projectName, frontend, install) => (0, exports.show)((0, chalk_1.default) `
 {green ======================================================}
-✅  Success! Created '${projectName}', 
+✅  Success! Created '${projectName}',
 )}${(0, exports.successFrontendToText)(frontend)}.
 {bold {bgYellow {black Next steps}}}:
 ${(0, exports.gatewayInstructions)(projectName, frontend, install)}`);
