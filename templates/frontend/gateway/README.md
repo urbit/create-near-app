@@ -19,12 +19,33 @@ Open [http://localhost:8081](http://localhost:8081) with your browser to see the
 
 This gateway is an ideal environment to develop Urbit-aware components to deploy on the NEAR blockchain, or develop an entire Urbit aware BOS gateway.
 
-To build local components run
+Build local components run
 
 ```
 npm run component-build
 #or
 npm run dev
+```
+
+To connect BOS gateway to your Urbit fakeship
+specify credentials in `.env` file.
+
+```.env
+# fakeship name without ~
+REACT_APP_FAKESHIP=zod
+
+# host URL and port your fakeship is running on
+REACT_APP_HOST=http://localhost:8080
+
+# fakeship access key
+REACT_APP_CODE=lidlut-tabwed-pillex-ridrup
+```
+
+Get fakeship access key, run +code command in your fakeship’s dojo (Urbit's command-line application).
+
+```
+> +code
+lidlut-tabwed-pillex-ridrup
 ```
 
 ### Gateway structure
