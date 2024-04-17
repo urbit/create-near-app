@@ -9,7 +9,7 @@ Quickly build Urbit-compatible NEAR Blockchain Operating System (BOS) gateway.
 
 ## Getting Started
 
-To create a new Urbit's NEAR dApp in[React](https://reactjs.org/) run this and follow interactive prompts:
+To create a new Urbit's NEAR dApp run this and follow interactive prompts:
 
     npx git+git@github.com:urbit/create-near-app.git
 
