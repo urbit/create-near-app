@@ -1,105 +1,52 @@
-# Create NEAR App
+# Create Urbit's NEAR dApp
 
-[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/nearprotocol/create-near-app)
-
-Quickly build apps backed by the [NEAR](https://near.org) blockchain
+Quickly build Urbit-compatible NEAR Blockchain Operating System (BOS) gateway.
 
 ## Prerequisites
 
-Make sure you have a [current version of Node.js](https://nodejs.org) installed – we are targeting versions `16+` for JS contracts and `18+` for frontend/gateways.
-
-Read about other [prerequisites](https://docs.near.org/develop/prerequisites) in our docs.
+- Make sure you have a [current version of Node.js](https://nodejs.org) installed – we are targeting versions `18` for frontend/gateways.
+- Have [Urbit environment setup](<(https://docs.urbit.org/courses/environment#creating-a-fake-ship)>) and running Urbit "fakeship".
 
 ## Getting Started
 
-To create a new NEAR project run this and follow interactive prompts:
+To create a new Urbit's NEAR dApp run this and follow interactive prompts:
 
-    npx create-near-app@latest
+    npx git+git@github.com:urbit/create-near-app.git
 
 Follow the instructions in the README.md in the project you just created! 🚀
 
-### Contracts
-
-You can create contracts written in:
-
-- `Javascript`
-- `Rust`
-
-:::
-We strongly recommend you to follow our [smart contract quickstart](https://docs.near.org/develop/contracts/welcome) if you are new to NEAR contracts.
-:::
-
-For testing we use a sandboxed environment. You can write the tests in JavaScript or Rust.
-
 ### WebApps
 
-You can create a web application in:
+You can create a web application in [React](https://reactjs.org/).
 
-- [React](https://reactjs.org/)
-- Vanilla JavaScript
-
-:::
-We strongly recommend you to follow our [web app quickstart](https://docs.near.org/develop/integrate/welcome) if you are new to NEAR WebApps.
-:::
-
-> Consider using `pnpm` to handle the webapps, since it is much faster than `npm` and `yarn`.
-
-## Using CLI arguments to run `create-near-app`
-
-This CLI supports arguments to skip interactive prompts:
-
-```shell
-npx create-near-app
-  <project-name>
-  --install
-```
-
-Use `--install` to automatically install dependencies from all `package.json` files.
-
-When using arguments, all arguments are required, except for `--install`.
+> We strongly recommend you to follow our [creating your first Urbit-compatible NEAR BOS gateway](https://docs.urbit.org/) if you are new to Urbit or isn’t so familiar with BOS.
 
 ## Getting Help
 
-Check out our [documentation](https://docs.near.org) or chat with us on [Discord](http://near.chat). We'd love to hear from you!
+Check out our [documentation](https://docs.urbit.org/) or chat with us in our [NEAR group](http://invite-group-link). We'd love to hear from you!
 
-## Contributing to `create-near-app`
+#### Deploy `urbit/create-near-app` on Urbit
 
-To make changes to `create-near-app` itself:
+To deploy your BOS gateway on Urbit, you’ll need to create a binary blob of the frontend code. After that, you can upload your gateway to the NEAR Gateways app for users on Urbit to use and install for themselves.
 
-- clone the repository (Windows users, [use `git clone -c core.symlinks=true`](https://stackoverflow.com/a/42137273/249801))
-- in your terminal, enter one of the folders inside `templates`, such as `templates/frontend/vanilla`
-- now you can run `pnpm install` to install dependencies and `pnpm run dev` to run the local development server, just like you can in a new app created with `create-near-app`
+1. `npm run build`
 
-#### About commit messages
+2. Use the fakeship’s [-make-glob](https://docs.urbit.org/userspace/apps/reference/dist/glob#-make-glob) functionality to make the glob.
+3. Upload your frontend glob to your S3 bucket. If you have the Silo app on your ship, it’s easy to do it in there.
+4. Once your glob is uploaded, go to NEAR Gateways and click the “Upload Gateway” card. Enter your BOS gateway’s name, glob url, and description in the form that shows up.
+5. Click “publish gateway” and wait for your gateway to upload. This could take some time, but you don’t have to keep the window open while you wait; your ship is processing the glob in the background.
 
-`create-near-app` uses semantic versioning and auto-generates nice release notes & a changelog all based off of the commits. We do this by enforcing [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/). In general the pattern mostly looks like this:
+#### Deploy Urbit aware component
 
-    type(scope?): subject  #scope is optional; multiple scopes are supported (current delimiter options: "/", "\" and ",")
+If you want to deploy components to the NEAR blockchain you’ll need a mainnet NEAR wallet. [MyNearWallet](https://www.mynearwallet.com/) is a popular choice.
 
-Real world examples can look like this:
+If you don’t want to pay the small fee for a mainnet wallet, MyNearWallet will let you create one on their [testnet](https://testnet.mynearwallet.com)
 
-    chore: run tests with GitHub Actions
+Once you have a wallet set up, use it to log in at [NEAR Social](https://near.social/) or [NEAR Social (testnet)](https://test.near.social/).
 
-    fix(server): send cors headers
+You can write and upload your components in the [NEAR Social Editor](https://near.social/edit).
 
-    feat(blog): add comment section
-
-If your change should show up in release notes as a feature, use `feat:`. If it should show up as a fix, use `fix:`. Otherwise, you probably want `refactor:` or `chore:`. [More info](https://github.com/conventional-changelog/commitlint/#what-is-commitlint)
-
-#### Deploy `create-near-app`
-
-If you want to deploy a new version, you will need two prerequisites:
-
-1. Get publish-access to [the NPM package](https://www.npmjs.com/package/near-api-js)
-2. Get write-access to [the GitHub repository](https://github.com/near/near-api-js)
-3. Obtain a [personal access token](https://gitlab.com/profile/personal_access_tokens) (it only needs the "repo" scope).
-4. Make sure the token is [available as an environment variable](https://github.com/release-it/release-it/blob/master/docs/environment-variables.md) called `GITHUB_TOKEN`
-
-Then run one script:
-
-    npm run release
-
-Or just `release-it`
+> The NEAR Social Editor does not currently recognize an Urbit object. You won’t be able to test Urbit methods in this editor. If the editor warns you about Urbit methods and you’ve tested them in your local gateway, you can safely ignore them.
 
 ## License
 
