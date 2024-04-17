@@ -17,7 +17,7 @@ module.exports = function (env) {
       mode,
       entry: `${paths.srcPath}/index.js`,
       output: {
-        path: paths.distPath,
+        path: path.resolve(__dirname, 'dist'),
         filename: '[name].bundle.js',
         publicPath: '/'
       },
@@ -84,7 +84,7 @@ module.exports = function (env) {
         new HTMLWebpackPlugin({
           template: `${paths.publicPath}/index.html`,
           robots: `${paths.publicPath}/robots.txt`,
-          publicPath: './'
+          publicPath: '/'
         }),
         new webpack.ProvidePlugin({
           process: 'process/browser',
