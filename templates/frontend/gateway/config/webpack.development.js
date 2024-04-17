@@ -38,14 +38,17 @@ module.exports = () => ({
       }
     ]
   },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].bundle.js',
+    publicPath: '/'
+  },
   devServer: {
     open: true,
     static: path.resolve(__dirname, '../dist'),
     port: 8081,
     compress: true,
-    historyApiFallback: {
-      disableDotRule: true
-    }
+    historyApiFallback: true
   },
   plugins: [new HotModuleReplacementPlugin()]
 })
