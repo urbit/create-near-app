@@ -51,6 +51,7 @@ const show = __importStar(require("./messages"));
     }
     if (createSuccess) {
         install && await (0, make_1.runDepsInstall)(projectPath);
+        await (0, make_1.runDepGitIgnore)(projectPath);
         show.setupSuccess(projectName, frontend, install);
     }
     else {

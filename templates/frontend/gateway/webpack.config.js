@@ -8,6 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { merge } = require('webpack-merge')
 const loadPreset = require('./config/presets/loadPreset')
 const loadConfig = (mode) => require(`./config/webpack.${mode}.js`)(mode)
+const Dotenv = require('dotenv-webpack')
 
 module.exports = function (env) {
   const { mode = 'production' } = env || {}
@@ -61,6 +62,7 @@ module.exports = function (env) {
         }
       },
       plugins: [
+        new Dotenv(),
         new webpack.EnvironmentPlugin({
           // Configure environment variables here.
           ENVIRONMENT: 'browser'

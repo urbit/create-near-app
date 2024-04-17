@@ -1,24 +1,29 @@
 import React from 'react'
 import { Widget } from 'near-social-vm'
-import { Widgets } from '../data/widgets'
-import newComponents from '../../build/data.json'
-
-//  hosts locally built VM components
-const header = newComponents['account.Urbit/widget/components.header']
-const UrbitWidget = newComponents['account.Urbit/widget/components.UrbitWidget']
+import localComponents from '../../build/data.json'
 
 function Urbit() {
-  const socialComponents = Widgets
+  //  on testnet chain components
+  const UrbitWidgetTestnet = 'urbitlabs.testnet/widget/UrbitWidget'
+  const UrbitHeaderTestnet = 'urbitlabs.testnet/widget/UrbitHeader'
+  //  hosts locally built VM components
+  const header = localComponents['account.Urbit/widget/components.header']
+  const UrbitWidget =
+    localComponents['account.Urbit/widget/components.UrbitWidget']
 
   return (
     <div>
-      <Widget src={socialComponents.UrbitHeader} />
+      {/* This component is onchain */}
+      <Widget src={UrbitHeaderTestnet} />
+      {/* This component is local and stored in build/data.json */}
       <Widget
+        // Uncomment src and comment out code attribute to pull same component but onchain
+        // src = {UrbitWidgetTestnet}
         code={UrbitWidget.code}
         props={{
-          ship: 'zod',
-          host: 'http://localhost:80',
-          code: 'lidlut-tabwed-pillex-ridrup'
+          ship: process.env.REACT_APP_FAKE_SHIP,
+          host: process.env.REACT_APP_HOST,
+          code: process.env.REACT_APP_FAKE_CODE
         }}
       />
     </div>

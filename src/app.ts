@@ -1,5 +1,5 @@
 import path from 'path';
-import { createProject, runDepsInstall } from './make';
+import { createProject, runDepsInstall, runDepGitIgnore } from './make';
 import { promptAndGetConfig, } from './user-input';
 import * as show from './messages';
 
@@ -32,7 +32,8 @@ import * as show from './messages';
   }
 
   if (createSuccess) {
-    install && await runDepsInstall(projectPath);
+    install && await runDepsInstall(projectPath)
+    await runDepGitIgnore(projectPath);
     show.setupSuccess(projectName, frontend, install);
   } else {
     return show.setupFailed();

@@ -13,7 +13,7 @@ exports.show = show;
 const welcome = () => (0, exports.show)((0, chalk_1.default) `
 {blue ======================================================}
 👋 {bold {green Welcome to Urbit's Create Near App! Learn more at https://docs.urbit.org/
-}} Learn more: https://docs.urbit.org/
+}} 
 🔧 Let's get your project ready.
 {blue ======================================================}`);
 exports.welcome = welcome;
@@ -52,8 +52,8 @@ ${!install
 exports.gatewayInstructions = gatewayInstructions;
 const argsError = (msg) => (0, exports.show)((0, chalk_1.default) `{red Arguments error: {white ${msg}}}
 
-Run {blue npx create-near-app} without arguments, or use:
-npx create-near-app <projectName> [--frontend next|vanilla|none] [--contract rs|ts|none --tests rs|ts|none]`);
+Run {blue npx urbit/create-near-app} without arguments, or use:
+npx urbit/create-near-app <projectName> `);
 exports.argsError = argsError;
 const unsupportedNodeVersion = (supported) => (0, exports.show)((0, chalk_1.default) `{red We support node.js version ${supported} or later}`);
 exports.unsupportedNodeVersion = unsupportedNodeVersion;

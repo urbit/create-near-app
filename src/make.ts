@@ -34,6 +34,7 @@ export function copyDir(source: string, dest: string) {
 
 export async function runDepsInstall(projectPath: string) {
   show.depsInstall();
+  //CHANGED TO PNPM
   await new Promise<void>((resolve, reject) => spawn('npm', ['install'], {
     cwd: projectPath,
     stdio: 'inherit',
@@ -45,4 +46,28 @@ export async function runDepsInstall(projectPath: string) {
       resolve();
     }
   }));
+}
+
+export async function runDepGitIgnore(projectPath: string){
+  return new Promise<void>((resolve, reject) => {
+    const gitIgnoreFileContent = 
+`# Node dependencies
+/node_modules
+
+# production
+/build
+/dist
+
+#mist
+.env
+`
+
+  fs.writeFile(path.join(projectPath, '.gitignore'), gitIgnoreFileContent, (err) => {
+    if (err) {
+      reject(err);
+    } else {
+      resolve();
+    }
+  });
+})
 }
