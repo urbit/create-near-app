@@ -76,7 +76,6 @@ export async function promptAndGetConfig(): Promise<{ config: UserConfig, projec
 
   if (!validateUserArgs(args)) return;
 
-
   let path = projectPath(args.projectName);
 
   if (fs.existsSync(path)) {

@@ -40,7 +40,7 @@ export const setupSuccess = (
 ) =>
   show(chalk`
 {green ======================================================}
-✅  Success! Created '${projectName}', 
+✅  Success! Created '${projectName}',
 )}${successFrontendToText(frontend)}.
 {bold {bgYellow {black Next steps}}}:
 ${gatewayInstructions(

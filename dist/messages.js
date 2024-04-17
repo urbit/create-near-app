@@ -33,7 +33,7 @@ const successFrontendToText = (frontend) => frontend === 'none'
 exports.successFrontendToText = successFrontendToText;
 const setupSuccess = (projectName, frontend, install) => (0, exports.show)((0, chalk_1.default) `
 {green ======================================================}
-✅  Success! Created '${projectName}', 
+✅  Success! Created '${projectName}',
 )}${(0, exports.successFrontendToText)(frontend)}.
 {bold {bgYellow {black Next steps}}}:
 ${(0, exports.gatewayInstructions)(projectName, frontend, install)}`);
