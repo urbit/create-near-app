@@ -24,7 +24,7 @@ function Urbit() {
         // src = {UrbitWidgetTestnet}
         code={UrbitWidget.code}
         props={{
-          ship: process.env.REACT_APP_FAKE_SHIP,
+          ship: process.env.REACT_APP_FAKESHIP,
           host: process.env.REACT_APP_HOST,
           code: process.env.REACT_APP_FAKE_CODE
         }}
