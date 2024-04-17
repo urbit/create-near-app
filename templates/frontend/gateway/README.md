@@ -65,7 +65,7 @@ Each Widget component has several optional attributes, but for now you only need
 
 ### Writing Urbit-aware NEAR components
 
-You’ll write new components in `/apps/widget/components` folder.
+You’ll [write new components]() in `/apps/widget/components` folder.
 
 This BOS gateway uses a fork of the NEAR Social VM that includes an [Urbit object](https://docs.urbit.org), and that object has methods you can use to interact with the local ship.
 
@@ -85,7 +85,7 @@ Urbit.pokeUrbit('hood', 'helm-hi', 'hello urbit!')
 
 Documentation:
 
-- [pokeUrbut method](https://docs.urbit.org)
+- [pokeUrbit method](https://docs.urbit.org)
 
 - [Pokes](https://docs.urbit.org/courses/app-school/6-pokes)
 
