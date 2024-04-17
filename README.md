@@ -21,7 +21,7 @@ Follow the instructions in the README.md in the project you just created! 🚀
 
 Check out our [documentation](https://docs.urbit.org/) or chat with us in our [NEAR group](http://invite-group-link). We'd love to hear from you!
 
-#### Deploy `urbit/create-near-app` on Urbit
+### Deploy `urbit/create-near-app` on Urbit
 
 To deploy your BOS gateway on Urbit, you’ll need to create a binary blob of the frontend code. After that, you can upload your gateway to the NEAR Gateways app for users on Urbit to use and install for themselves.
 
@@ -32,7 +32,7 @@ To deploy your BOS gateway on Urbit, you’ll need to create a binary blob of th
 4. Once your glob is uploaded, go to NEAR Gateways and click the “Upload Gateway” card. Enter your BOS gateway’s name, glob url, and description in the form that shows up.
 5. Click “publish gateway” and wait for your gateway to upload. This could take some time, but you don’t have to keep the window open while you wait; your ship is processing the glob in the background.
 
-#### Deploy Urbit aware component
+### Deploy Urbit aware component
 
 If you want to deploy components to the NEAR blockchain you’ll need a mainnet NEAR wallet. [MyNearWallet](https://www.mynearwallet.com/) is a popular choice.
 
