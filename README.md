@@ -5,19 +5,15 @@ Quickly build Urbit-compatible NEAR Blockchain Operating System (BOS) gateway.
 ## Prerequisites
 
 - Make sure you have a [current version of Node.js](https://nodejs.org) installed – we are targeting versions `18` for frontend/gateways.
-- Have [Urbit environment setup](<(https://docs.urbit.org/courses/environment#creating-a-fake-ship)>) and running Urbit "fakeship".
+- Have [Urbit environment setup](https://docs.urbit.org/courses/environment#creating-a-fake-ship) and running Urbit "fakeship".
 
 ## Getting Started
 
-To create a new Urbit's NEAR dApp run this and follow interactive prompts:
+To create a new Urbit's NEAR dApp in[React](https://reactjs.org/) run this and follow interactive prompts:
 
     npx git+git@github.com:urbit/create-near-app.git
 
 Follow the instructions in the README.md in the project you just created! 🚀
-
-### WebApps
-
-You can create a web application in [React](https://reactjs.org/).
 
 > We strongly recommend you to follow our [creating your first Urbit-compatible NEAR BOS gateway](https://docs.urbit.org/) if you are new to Urbit or isn’t so familiar with BOS.
 
