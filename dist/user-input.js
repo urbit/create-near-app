@@ -33,7 +33,6 @@ const prompts_1 = __importDefault(require("prompts"));
 const commander_1 = require("commander");
 const show = __importStar(require("./messages"));
 const semver_1 = __importDefault(require("semver"));
-const tracking_1 = require("./tracking");
 const fs_1 = __importDefault(require("fs"));
 async function getUserArgs() {
     commander_1.program
@@ -89,9 +88,6 @@ async function promptAndGetConfig() {
     args.frontend = 'gateway'; //args.frontend || 'none';
     if (!validateUserArgs(args))
         return;
-    // track user input
-    const { frontend } = args;
-    (0, tracking_1.trackUsage)(frontend);
     let path = (0, exports.projectPath)(args.projectName);
     if (fs_1.default.existsSync(path)) {
         return show.directoryExists(path);

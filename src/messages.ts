@@ -1,5 +1,4 @@
 import chalk from 'chalk';
-import { trackingMessage } from './tracking';
 import { Frontend, FrontendMessage, ProjectName } from './types';
 
 if (process.env.NEAR_NO_COLOR) {
@@ -14,8 +13,7 @@ export const welcome = () =>
 👋 {bold {green Welcome to Urbit's Create Near App! Learn more at https://docs.urbit.org/
 }} Learn more: https://docs.urbit.org/
 🔧 Let's get your project ready.
-{blue ======================================================}
-(${trackingMessage})`);
+{blue ======================================================}`);
 
 export const setupFailed = () =>
   show(chalk`{bold {red ==========================================}}
@@ -42,7 +40,7 @@ export const setupSuccess = (
 ) =>
   show(chalk`
 {green ======================================================}
-✅  Success! Created '${projectName}', 
+✅  Success! Created '${projectName}',
 )}${successFrontendToText(frontend)}.
 {bold {bgYellow {black Next steps}}}:
 ${gatewayInstructions(

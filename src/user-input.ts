@@ -10,7 +10,6 @@ import prompt, { PromptObject } from 'prompts';
 import { program } from 'commander';
 import * as show from './messages';
 import semver from 'semver';
-import { trackUsage } from './tracking';
 import fs from 'fs';
 
 export async function getUserArgs(): Promise<UserConfig> {
@@ -76,10 +75,6 @@ export async function promptAndGetConfig(): Promise<{ config: UserConfig, projec
   args.frontend = 'gateway'  //args.frontend || 'none';
 
   if (!validateUserArgs(args)) return;
-
-  // track user input
-  const { frontend } = args;
-  trackUsage(frontend);
 
   let path = projectPath(args.projectName);
 
