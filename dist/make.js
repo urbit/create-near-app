@@ -59,7 +59,7 @@ exports.copyDir = copyDir;
 async function runDepsInstall(projectPath) {
     show.depsInstall();
     //CHANGED TO PNPM
-    await new Promise((resolve, reject) => (0, cross_spawn_1.default)('npm', ['install'], {
+    await new Promise((resolve, reject) => (0, cross_spawn_1.default)('pnpm', ['install'], {
         cwd: projectPath,
         stdio: 'inherit',
     }).on('close', (code) => {
