@@ -24,7 +24,7 @@
     "dotenv-webpack": "^8.1.0",
     "error-polyfill": "^0.1.2",
     "near-api-js": "^2.1.3",
-    "near-social-vm": "../../NearSocialVm",
+    "near-social-vm": "github:urbit/NearSocialVm",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-bootstrap-typeahead": "^6.3.2",
