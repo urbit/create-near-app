@@ -108,7 +108,7 @@ return (
         </Form>
     </Section>
     <Section>
-      <TextArea value={response}></TextArea>
+      <TextArea value={response} readOnly></TextArea>
     </Section>
   </Container>
 );
