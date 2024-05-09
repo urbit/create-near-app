@@ -1,5 +1,5 @@
 {
-  "name": "create-near-app",
+  "name": "@urbit/create-near-app",
   "version": "6.3.1",
   "description": "Quickly scaffold your Urbit's dApp on NEAR Blockchain",
   "main": "index.js",
