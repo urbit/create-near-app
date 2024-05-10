@@ -84,7 +84,7 @@ module.exports = function (env) {
         new HTMLWebpackPlugin({
           template: `${paths.publicPath}/index.html`,
           robots: `${paths.publicPath}/robots.txt`,
-          publicPath: '/'
+          publicPath: './'
         }),
         new webpack.ProvidePlugin({
           process: 'process/browser',
