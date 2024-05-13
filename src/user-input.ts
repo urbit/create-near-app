@@ -35,7 +35,7 @@ const namePrompts: PromptObject = {
 const npmPrompt: PromptObject = {
   type: 'confirm',
   name: 'install',
-  message: chalk`Run {bold {blue 'npm install'}} now?`,
+  message: chalk`Run {bold {blue 'pnpm install'}} now?`,
   initial: true,
 };
 

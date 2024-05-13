@@ -12,7 +12,7 @@ This is a [React](https://reactjs.org/) app bootstrapped with [`bos-workspace` c
 First, run the development server:
 
 ```
-npm run dev
+pnpm run dev
 ```
 
 Open [http://localhost:8081](http://localhost:8081) with your browser to see the result.
@@ -22,9 +22,9 @@ This gateway is an ideal environment to develop Urbit-aware components to deploy
 Build local components run
 
 ```
-npm run component-build
+pnpm run component-build
 #or
-npm run dev
+pnpm run dev
 ```
 
 To connect BOS gateway to your Urbit fakeship

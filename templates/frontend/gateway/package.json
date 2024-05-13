@@ -9,11 +9,11 @@
   "scripts": {
     "serve": "webpack serve",
     "webpack": "webpack",
-    "dev": "npm run component-build && npm run serve -- --env mode=development",
-    "prod": "npm run webpack -- --env mode=production",
-    "prod:analyze": "npm run prod -- --env presets=analyze",
-    "build": "npm run prod",
-    "start": "npm run dev",
+    "dev": "pnpm run component-build && pnpm run serve -- --env mode=development",
+    "prod": "pnpm run webpack -- --env mode=production",
+    "prod:analyze": "pnpm run prod -- --env presets=analyze",
+    "build": "pnpm run prod",
+    "start": "pnpm run dev",
     "component-build": "bos-workspace dev"
   },
   "dependencies": {
