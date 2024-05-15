@@ -39,7 +39,8 @@
     "react-router-dom": "^5.3.4",
     "sass": "^1.76.0",
     "sass-loader": "^14.2.1",
-    "webpack": "^5.91.0"
+    "webpack": "^5.91.0",
+    "@urbit/http-api": "^2.3.0"
   },
   "eslintConfig": {
     "extends": [
