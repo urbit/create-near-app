@@ -12,7 +12,7 @@ This is a [React](https://reactjs.org/) app bootstrapped with [`bos-workspace` c
 First, run the development server:
 
 ```
-pnpm run dev
+pnpm start
 ```
 
 Open [http://localhost:8081](http://localhost:8081) with your browser to see the result.
@@ -24,7 +24,7 @@ Build local components run
 ```
 pnpm run component-build
 #or
-pnpm run dev
+pnpm start
 ```
 
 To connect BOS gateway to your Urbit fakeship
