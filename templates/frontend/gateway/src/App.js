@@ -13,6 +13,7 @@ import {
   Switch
 } from 'react-router-dom'
 import Urbit from './pages/Urbit'
+import { RemoteShipProvider } from './RemoteShipContext'
 
 export const refreshAllowanceObj = {}
 
@@ -33,14 +34,16 @@ function App(props) {
   let str = window.location.pathname
   let before = str.substring(0, str.indexOf(`/gateway`))
   return (
-    <Router basename={`${before}/gateway`}>
-      <Switch>
-        <Redirect exact from="/" to="/urbit" />
-        <Route path="/urbit">
-          <Urbit {...passProps} />
-        </Route>
-      </Switch>
-    </Router>
+    <RemoteShipProvider>
+      <Router basename={`${before}/gateway`}>
+        <Switch>
+          <Redirect exact from="/" to="/urbit" />
+          <Route path="/urbit">
+            <Urbit {...passProps} />
+          </Route>
+        </Switch>
+      </Router>
+    </RemoteShipProvider>
   )
 }
 
