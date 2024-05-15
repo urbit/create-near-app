@@ -14,7 +14,7 @@
     "prod": "pnpm run component-build && pnpm run webpack -- --env mode=production",
     "prod:analyze": "pnpm run prod -- --env presets=analyze",
     "build": "pnpm run prod",
-    "start": "pnpm run dev",
+    "start": "concurrently \"pnpm run watch\" \"pnpm run dev\"",
     "component-build": "bos-workspace dev"
   },
   "watch": {
