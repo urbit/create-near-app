@@ -25,7 +25,7 @@ Check out our [documentation](https://docs.urbit.org/) or chat with us in our [N
 
 To deploy your BOS gateway on Urbit, you’ll need to create a binary blob of the frontend code. After that, you can upload your gateway to the NEAR Gateways app for users on Urbit to use and install for themselves.
 
-1. `npm run build`
+1. `pnpm run build`
 
 2. Use the fakeship’s [-make-glob](https://docs.urbit.org/userspace/apps/reference/dist/glob#-make-glob) functionality to make the glob.
 3. Upload your frontend glob to your S3 bucket. If you have the Silo app on your ship, it’s easy to do it in there.

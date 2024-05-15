@@ -1,5 +1,5 @@
 //  Below you can find /widget/components.helloUrbit
-//  To build test component run "npm run component-build"
+//  To build test component run "pnpm run component-build"
 //  You can look for further testing instructions in src/app/hello-components/page.js
 
 const Label = styled.span`

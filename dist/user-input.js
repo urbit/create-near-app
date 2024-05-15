@@ -56,7 +56,7 @@ const namePrompts = {
 const npmPrompt = {
     type: 'confirm',
     name: 'install',
-    message: (0, chalk_1.default) `Run {bold {blue 'npm install'}} now?`,
+    message: (0, chalk_1.default) `Run {bold {blue 'pnpm install'}} now?`,
     initial: true,
 };
 const promptUser = async (prompts) => {
