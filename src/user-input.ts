@@ -33,10 +33,16 @@ const namePrompts: PromptObject = {
 };
 
 const npmPrompt: PromptObject = {
+  // type: 'toggle',
+  // name: 'value',
+  // message: chalk`Run {bold {blue 'pnpm install'}} now?`,
+  // initial: true,
+  // active: 'yes',
+  // inactive: 'no'
   type: 'confirm',
   name: 'install',
   message: chalk`Run {bold {blue 'pnpm install'}} now?`,
-  initial: true,
+  initial: true
 };
 
 const promptUser = async (prompts: PromptObject | PromptObject[]): Promise<prompt.Answers<string>> => {
