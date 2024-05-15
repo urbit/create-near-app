@@ -40,8 +40,7 @@ export const setupSuccess = (
 ) =>
   show(chalk`
 {green ======================================================}
-✅  Success! Created '${projectName}',
-)}${successFrontendToText(frontend)}.
+✅  Success! Created '${projectName}', ${successFrontendToText(frontend)}.
 {bold {bgYellow {black Next steps}}}:
 ${gatewayInstructions(
   projectName,
@@ -94,4 +93,4 @@ export const depsInstall = () =>
 `);
 
 export const depsInstallError = () =>
-  show(chalk.red('Error installing NEAR project dependencies'));
+  show(chalk`{red Error installing NEAR project dependencies!}`);
