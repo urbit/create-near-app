@@ -1,16 +1,5 @@
 let { ship } = props
 
-  // // not needed if running this component on a live ship
-  // if (!window.ship) {
-  //   // id of the fakeship
-  //   Urbit.ship(`${process.env.REACT_APP_FAKESHIP}`)
-  //   // url and auth for a fakeship
-  //   Urbit.setTestApi(
-  //     `${process.env.REACT_APP_HOST}`,
-  //     `${props.REACT_APP_FAKE_CODE}`
-  //   )
-  // }
-
 const Label = styled.span`
   font-size: 16px`
 
