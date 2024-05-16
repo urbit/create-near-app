@@ -1,48 +1,58 @@
 let { ship } = props
 
 const Label = styled.span`
-  font-size: 16px`
+  font-size: 16px;
+`
 
 const Form = styled.div`
-  max-width: 300px
-  margin: 20px auto
-  text-align: center`
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+`
 
 const Input = styled.input`
-  width: 100%
-  padding: 5px
-  border: 1px solid #bbc0c1
-  border-radius: 10px`
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #bbc0c1;
+  border-radius: 10px;
+`
 
 const Section = styled.div`
-  display: flex
-  justify-content: space-between
-  background-color: #f5f5f5 /* Light grey background */
-  padding: 20px
-  border-radius: 10px
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  overflow: hidden;
+`
 
 const TextArea = styled.textarea`
-  width: 100%
-  height: 200px
-  border: 1px solid #ccc /* Faint grey border */
-  border-radius: 10px
-  padding: 10px
-  box-sizing: border-box
-  font-family: inherit
-  resize: none /* Optional: Disables resizing */`
+  width: 100%;
+  height: 200px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-sizing: border-box;
+  font-family: inherit;
+  resize: none;
+`
 
 const Button = styled.button`
-width: auto
-padding: 5px
-padding-left:15px
-padding-right:15px
-margin-top: 10px
-margin-bottom:10px
-background-color: white
-border: 1px solid #bbc0c1
-color: black
-cursor: pointer`
+  width: auto;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  border: 1px solid #bbc0c1;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+`
 
 const [scryApp, setScryApp] = useState('')
 const [scryPath, setScryPath] = useState('')
@@ -52,18 +62,18 @@ const handleScryButton = (e) => {
   e.preventDefault()
 
   Urbit.scryUrbit(scryApp, scryPath)
-  .then((res) => {
-    setScryResponse(JSON.stringify(res))
-    setScryApp('')
-    setScryPath('')
-  })
+    .then((res) => {
+      setScryResponse(JSON.stringify(res))
+      setScryApp('')
+      setScryPath('')
+    })
 }
 
 return (
   <Section>
     <Form>
       <Label>{`Scry to ~${ship}`}</Label>
-      <br/>
+      <br />
       <Label>App</Label>
       <Input
         type="text"

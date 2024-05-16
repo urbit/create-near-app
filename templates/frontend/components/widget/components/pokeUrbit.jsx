@@ -1,38 +1,48 @@
 let { ship } = props
 
 const Label = styled.span`
-  font-size: 16px`
+  font-size: 16px;
+`
 
 const Form = styled.div`
-  max-width: 300px
-  margin: 20px auto
-  text-align: center`
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+`
 
 const Input = styled.input`
-  width: 100%
-  padding: 5px
-  border: 1px solid #bbc0c1
-  border-radius: 10px`
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #bbc0c1;
+  border-radius: 10px;
+`
 
 const Section = styled.div`
-  display: flex
-  justify-content: space-between
-  background-color: #f5f5f5 /* Light grey background */
-  padding: 20px
-  border-radius: 10px
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+`
 
 const Button = styled.button`
-width: auto
-padding: 5px
-padding-left:15px
-padding-right:15px
-margin-top: 10px
-margin-bottom:10px
-background-color: white
-border: 1px solid #bbc0c1
-color: black
-cursor: pointer`
+  width: auto;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+  border: 1px solid #bbc0c1;
+  color: black;
+  cursor: pointer;
+  border-radius: 5px;
+`
 
 const [pokeApp, setPokeApp] = useState('')
 const [pokeMark, setPokeMark] = useState('')
@@ -46,19 +56,16 @@ const handlePokeButton = () => {
     pokeJson,
     () => {
       setPokeStatus(`Poke to ${pokeApp} succeeded!`)
+      setPokeApp('')
+      setPokeMark('')
+      setPokeJson('')
     },
     () => {
       setPokeStatus(`Poke to ${pokeApp} failed`)
     })
-  .then(res => {
-    setPokeApp('')
-    setPokeMark('')
-    setPokeJson('')
-  })
 }
 
 return (
-  <div>
     <Section>
       <Form>
         <Label>{`Poke ~${ship}`}</Label>
@@ -91,5 +98,4 @@ return (
       </Form>
       <p>{pokeStatus}</p>
     </Section>
-  </div>
 )

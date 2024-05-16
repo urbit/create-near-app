@@ -4,40 +4,41 @@ import localComponents from '../../build/data.json'
 import { RemoteShipContext } from '../RemoteShipContext'
 
 function Urbit() {
-  //  components hosted on testnet
   const UrbitWidgetTestnet = 'urbitlabs.testnet/widget/UrbitWidget'
   const UrbitHeaderTestnet = 'urbitlabs.testnet/widget/UrbitHeader'
-  //  locally built VM components
-  const Documentation =
-    localComponents['account.Urbit/widget/components.documentation']
-  const localPokeUrbit =
-    localComponents['account.Urbit/widget/components.pokeUrbit']
-  const localScryUrbit =
-    localComponents['account.Urbit/widget/components.scryUrbit']
+  const localUrbitHeader = localComponents['account.Urbit/widget/components.header']
+  const localPokeUrbit = localComponents['account.Urbit/widget/components.pokeUrbit']
+  const localScryUrbit = localComponents['account.Urbit/widget/components.scryUrbit']
 
   const remote = useContext(RemoteShipContext)
 
   return (
     <div>
-      {/* TODO switch to mainnet */}
-      {/* This component is onchain */}
-      <Widget src={UrbitHeaderTestnet} />
-      {/* This component is local and stored in build/data.json */}
-      <Widget code={Documentation.code} />
-      <div style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-        {/* These components are onchain, but there are
-            copies of them in this project  */}
-        <Widget
-          // TODO add mainnet src
-          code={localPokeUrbit.code}
-          props={{ ship: window.ship ?? remote.ship }}
-        />
-        <Widget
-          // TODO add mainnet src
-          code={localScryUrbit.code}
-          props={{ ship: window.ship ?? remote.ship }}
-        />
-      </div>
+      <Widget
+        code={localUrbitHeader.code}
+      />
+        <div style={{
+          display: 'flex',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          height: '500px',
+          width: '75vw',
+          margin: 'auto'
+        }}>
+          <div>
+            <Widget
+              code={localPokeUrbit.code}
+              props={{ ship: window.ship ?? remote.ship }}
+            />
+          </div>
+          <div>
+            <Widget
+              code={localScryUrbit.code}
+              props={{ ship: window.ship ?? remote.ship }}
+            />
+          </div>
+        </div>
     </div>
   )
 }
