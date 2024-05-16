@@ -1,6 +1,6 @@
 'use client'
 import { useEffect } from 'react'
-import { useInitNear, Widget, EthersProviderContext } from '../../../gateway/src/vm/dist/index'
+import { useInitNear, Widget, EthersProviderContext } from 'near-social-vm'
 
 import { useWallet } from '@/wallets/wallet-selector'
 import { useEthersProviderContext } from '@/wallets/web3-wallet'

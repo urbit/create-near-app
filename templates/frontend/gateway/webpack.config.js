@@ -75,21 +75,19 @@ module.exports = function (env) {
           path: require.resolve('path-browserify'),
           zlib: require.resolve('browserify-zlib')
         },
-        // Fix for using `yarn link "near-social-vm"`
         alias: {
           react: path.resolve(__dirname, './node_modules/react'),
           'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
-          'near-api-js': path.resolve(__dirname, './node_modules/near-api-js')
+          'near-api-js': path.resolve(__dirname, './node_modules/near-api-js'),
+          'near-social-vm': path.resolve(__dirname, './src/vm')
         }
       },
       plugins: [
         new Dotenv(),
         new webpack.EnvironmentPlugin({
-          // Configure environment variables here.
           ENVIRONMENT: 'browser'
         }),
         new CleanWebpackPlugin(),
-        // Copies files from target to destination folder
         new CopyWebpackPlugin({
           patterns: [
             {

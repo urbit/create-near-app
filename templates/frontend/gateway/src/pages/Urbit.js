@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Widget } from '../vm/dist/index'
+import { Widget } from 'near-social-vm'
 import localComponents from '../../build/data.json'
 import { RemoteShipContext } from '../RemoteShipContext'
 
