@@ -85,7 +85,8 @@ module.exports = function (env) {
       plugins: [
         new Dotenv(),
         new webpack.EnvironmentPlugin({
-          ENVIRONMENT: 'browser'
+          ENVIRONMENT: 'browser',
+          MODE: mode === 'development' ? 'development' : 'production'
         }),
         new CleanWebpackPlugin(),
         new CopyWebpackPlugin({
