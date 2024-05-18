@@ -78,15 +78,14 @@ module.exports = function (env) {
         alias: {
           react: path.resolve(__dirname, './node_modules/react'),
           'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
-          'near-api-js': path.resolve(__dirname, './node_modules/near-api-js'),
-          'near-social-vm': path.resolve(__dirname, './src/vm')
+          'near-api-js': path.resolve(__dirname, './node_modules/near-api-js')
         }
       },
       plugins: [
         new Dotenv(),
         new webpack.EnvironmentPlugin({
           ENVIRONMENT: 'browser',
-          MODE: mode === 'development' ? 'development' : 'production'
+          MODE: mode
         }),
         new CleanWebpackPlugin(),
         new CopyWebpackPlugin({

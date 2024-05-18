@@ -1,4 +1,4 @@
-let { ship } = props
+let { ship, url, code } = props
 
 const Label = styled.span`
   font-size: 16px;
@@ -53,6 +53,9 @@ const Button = styled.button`
   cursor: pointer;
   border-radius: 5px;
 `
+
+Urbit.ship(ship)
+Urbit.setTestApi(url, code)
 
 const [scryApp, setScryApp] = useState('')
 const [scryPath, setScryPath] = useState('')
