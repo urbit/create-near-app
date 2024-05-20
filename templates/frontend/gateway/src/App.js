@@ -12,13 +12,23 @@ import {
   BrowserRouter as Router,
   Switch
 } from 'react-router-dom'
-import Urbit from './pages/Urbit'
-import { RemoteShipProvider } from './RemoteShipContext'
+import ExamplePage from './pages/ExamplePage'
 
 export const refreshAllowanceObj = {}
 
 function App(props) {
   const { initNear } = useInitNear()
+  const api = {}
+
+  if (process.env.MODE === 'production') {
+    api.ship = window.ship
+  }
+
+  if (process.env.MODE === 'development') {
+    api.ship = process.env.REACT_APP_SHIP
+    api.url = process.env.REACT_APP_HOST
+    api.code = process.env.REACT_APP_CODE
+  }
 
   useEffect(() => {
     initNear &&
@@ -28,22 +38,21 @@ function App(props) {
   }, [initNear])
 
   const passProps = {
-    refreshAllowance: () => refreshAllowance()
+    refreshAllowance: () => refreshAllowance(),
+    api
   }
 
   let str = window.location.pathname
   let before = str.substring(0, str.indexOf(`/gateway`))
   return (
-    <RemoteShipProvider>
       <Router basename={`${before}/gateway`}>
         <Switch>
-          <Redirect exact from="/" to="/urbit" />
-          <Route path="/urbit">
-            <Urbit {...passProps} />
+          <Redirect exact from="/" to="/example" />
+          <Route path="/example">
+            <ExamplePage {...passProps} />
           </Route>
         </Switch>
       </Router>
-    </RemoteShipProvider>
   )
 }
 

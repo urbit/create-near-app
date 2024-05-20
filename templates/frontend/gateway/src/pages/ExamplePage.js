@@ -1,16 +1,13 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Widget } from 'near-social-vm'
 import localComponents from '../../build/data.json'
-import { RemoteShipContext } from '../RemoteShipContext'
 
-function Urbit() {
+function ExamplePage({ api }) {
   const UrbitWidgetTestnet = 'urbitlabs.testnet/widget/UrbitWidget'
   const UrbitHeaderTestnet = 'urbitlabs.testnet/widget/UrbitHeader'
   const localUrbitHeader = localComponents['account.Urbit/widget/components.header']
   const localPokeUrbit = localComponents['account.Urbit/widget/components.pokeUrbit']
   const localScryUrbit = localComponents['account.Urbit/widget/components.scryUrbit']
-
-  const api = useContext(RemoteShipContext)
 
   return (
     <div>
@@ -43,4 +40,4 @@ function Urbit() {
   )
 }
 
-export default Urbit
+export default ExamplePage
