@@ -1,4 +1,5 @@
 let { ship, url, code } = props
+Urbit.setApi({ ship: ship, url: url, code: code })
 
 const Label = styled.span`
   font-size: 16px;
@@ -44,16 +45,13 @@ const Button = styled.button`
   border-radius: 5px;
 `
 
-Urbit.ship(ship)
-Urbit.setTestApi(url, code)
-
 const [pokeApp, setPokeApp] = useState('')
 const [pokeMark, setPokeMark] = useState('')
 const [pokeJson, setPokeJson] = useState('')
 const [pokeStatus, setPokeStatus] = useState('')
 
 const handlePokeButton = () => {
-  Urbit.pokeUrbit(
+  Urbit.poke(
     pokeApp,
     pokeMark,
     pokeJson,

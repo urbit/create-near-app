@@ -1,4 +1,5 @@
 let { ship, url, code } = props
+Urbit.setApi({ship: ship, url: url, code: code })
 
 const Label = styled.span`
   font-size: 16px;
@@ -54,9 +55,6 @@ const Button = styled.button`
   border-radius: 5px;
 `
 
-Urbit.ship(ship)
-Urbit.setTestApi(url, code)
-
 const [scryApp, setScryApp] = useState('')
 const [scryPath, setScryPath] = useState('')
 const [scryResponse, setScryResponse] = useState('')
@@ -64,7 +62,7 @@ const [scryResponse, setScryResponse] = useState('')
 const handleScryButton = (e) => {
   e.preventDefault()
 
-  Urbit.scryUrbit(scryApp, scryPath)
+  Urbit.scry(scryApp, scryPath)
     .then((res) => {
       setScryResponse(JSON.stringify(res))
       setScryApp('')
