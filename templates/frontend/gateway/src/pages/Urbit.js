@@ -10,7 +10,7 @@ function Urbit() {
   const localPokeUrbit = localComponents['account.Urbit/widget/components.pokeUrbit']
   const localScryUrbit = localComponents['account.Urbit/widget/components.scryUrbit']
 
-  const remote = useContext(RemoteShipContext)
+  const api = useContext(RemoteShipContext)
 
   return (
     <div>
@@ -29,21 +29,13 @@ function Urbit() {
           <div>
             <Widget
               code={localPokeUrbit.code}
-              props={{
-                ship: window.ship ?? remote.ship,
-                url: remote.url,
-                code: remote.code
-              }}
+              props={{ api: api }}
             />
           </div>
           <div>
             <Widget
               code={localScryUrbit.code}
-              props={{
-                ship: window.ship ?? remote.ship,
-                url: remote.url,
-                code: remote.code
-              }}
+              props={{ api: api }}
             />
           </div>
         </div>

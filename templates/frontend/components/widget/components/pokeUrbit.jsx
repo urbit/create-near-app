@@ -1,5 +1,5 @@
-let { ship, url, code } = props
-Urbit.setApi({ ship: ship, url: url, code: code })
+let { api } = props
+Urbit.setApi(api)
 
 const Label = styled.span`
   font-size: 16px;
@@ -69,7 +69,7 @@ const handlePokeButton = () => {
 return (
     <Section>
       <Form>
-        <Label>{`Poke ~${ship}`}</Label>
+        <Label>{`Poke ~${api.ship}`}</Label>
         <br/>
         <Label>App</Label>
         <Input
@@ -93,7 +93,7 @@ return (
           value={pokeJson}
           onChange={(e) => setPokeJson(e.target.value)}
           name="pokeJson"
-          placeholder={`hi ~${ship}`}
+          placeholder={`hi ~${api.ship}`}
         />
         <Button onClick={handlePokeButton}>Send Poke</Button>
       </Form>

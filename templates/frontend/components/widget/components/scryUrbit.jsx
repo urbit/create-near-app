@@ -1,5 +1,5 @@
-let { ship, url, code } = props
-Urbit.setApi({ship: ship, url: url, code: code })
+let { api } = props
+Urbit.setApi(api)
 
 const Label = styled.span`
   font-size: 16px;
@@ -73,7 +73,7 @@ const handleScryButton = (e) => {
 return (
   <Section>
     <Form>
-      <Label>{`Scry to ~${ship}`}</Label>
+      <Label>{`Scry to ~${api.ship}`}</Label>
       <br />
       <Label>App</Label>
       <Input
