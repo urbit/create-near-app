@@ -32,7 +32,7 @@ specify credentials in `.env` file.
 
 ```.env
 # fakeship name without ~
-REACT_APP_FAKESHIP=zod
+REACT_APP_SHIP=zod
 
 # host URL and port your fakeship is running on
 REACT_APP_HOST=http://localhost:8080

@@ -75,7 +75,6 @@ module.exports = function (env) {
           path: require.resolve('path-browserify'),
           zlib: require.resolve('browserify-zlib')
         },
-        // Fix for using `yarn link "near-social-vm"`
         alias: {
           react: path.resolve(__dirname, './node_modules/react'),
           'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
@@ -85,11 +84,10 @@ module.exports = function (env) {
       plugins: [
         new Dotenv(),
         new webpack.EnvironmentPlugin({
-          // Configure environment variables here.
-          ENVIRONMENT: 'browser'
+          ENVIRONMENT: 'browser',
+          MODE: mode
         }),
         new CleanWebpackPlugin(),
-        // Copies files from target to destination folder
         new CopyWebpackPlugin({
           patterns: [
             {
