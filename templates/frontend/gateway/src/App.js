@@ -50,7 +50,7 @@ function App(props) {
   useEffect(() => {
     if (initNear) {
       initNear({
-        networkId: 'testnet'
+        networkId: 'mainnet'
       })
     }
   }, [initNear])

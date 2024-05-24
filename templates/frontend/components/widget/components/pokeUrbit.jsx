@@ -60,9 +60,11 @@ const handlePokeButton = () => {
       setPokeApp('')
       setPokeMark('')
       setPokeJson('')
+      setTimeout(() => setPokeStatus(''), 4000)
     },
     () => {
       setPokeStatus(`Poke to ${pokeApp} failed`)
+      setTimeout(() => setPokeStatus(''), 4000)
     })
 }
 

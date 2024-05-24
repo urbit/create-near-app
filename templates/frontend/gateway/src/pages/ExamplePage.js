@@ -3,11 +3,9 @@ import { Widget } from 'near-social-vm'
 import localComponents from '../../build/data.json'
 
 function ExamplePage({ api }) {
-  const UrbitWidgetTestnet = 'urbitlabs.testnet/widget/UrbitWidget'
-  const UrbitHeaderTestnet = 'urbitlabs.testnet/widget/UrbitHeader'
-  const localUrbitHeader = localComponents['account.Urbit/widget/components.header']
-  const localPokeUrbit = localComponents['account.Urbit/widget/components.pokeUrbit']
-  const localScryUrbit = localComponents['account.Urbit/widget/components.scryUrbit']
+  const localUrbitHeader = localComponents['local.components/widget/components.header']
+  const localPokeUrbit = localComponents['local.components/widget/components.pokeUrbit']
+  const localScryUrbit = localComponents['local.components/widget/components.scryUrbit']
 
   return (
     <div>
@@ -25,12 +23,14 @@ function ExamplePage({ api }) {
         }}>
           <div>
             <Widget
+              // src={'urbitlabs.near/widget/pokeUrbit'}
               code={localPokeUrbit.code}
               props={{ api: api }}
             />
           </div>
           <div>
             <Widget
+              // src={'urbitlabs.near/widget/scryUrbit'}
               code={localScryUrbit.code}
               props={{ api: api }}
             />
