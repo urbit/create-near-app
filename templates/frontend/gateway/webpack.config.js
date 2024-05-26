@@ -1,34 +1,14 @@
 const webpack = require('webpack')
 const paths = require('./config/paths')
 const path = require('path')
-const ManifestPlugin = require('webpack-manifest-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { merge } = require('webpack-merge')
 const loadPreset = require('./config/presets/loadPreset')
-const loadConfig = (mode) => require(`./config/webpack.${mode}.js`)(mode)
 const Dotenv = require('dotenv-webpack')
-
-class HTMLPlugin {
-  constructor(env) {
-    this.env = env
-  }
-
-  apply(compiler) {
-    const { mode = 'production' } = this.env || {}
-    const isDevelopment = mode === 'development'
-
-    const htmlPluginOptions = {
-      template: `${paths.publicPath}/index.html`,
-      robots: `${paths.publicPath}/robots.txt`,
-      publicPath: isDevelopment ? '/' : './'
-    }
-
-    const htmlWebpackPlugin = new HTMLWebpackPlugin(htmlPluginOptions)
-    htmlWebpackPlugin.apply(compiler)
-  }
-}
+// const HtmlWebpackPlugin = require('html-webpack-plugin')
+const loadConfig = (mode) => require(`./config/webpack.${mode}.js`)(mode)
 
 module.exports = function (env) {
   const { mode = 'production' } = env || {}
@@ -38,7 +18,7 @@ module.exports = function (env) {
       mode,
       entry: `${paths.srcPath}/index.js`,
       output: {
-        path: path.resolve(__dirname, 'dist'),
+        path: paths.distPath,
         filename: '[name].bundle.js',
         publicPath: '/'
       },
@@ -47,7 +27,7 @@ module.exports = function (env) {
           {
             test: /\.m?js/,
             resolve: {
-              fullySpecified: false
+              fullySpecified: false,
             }
           },
           {
@@ -66,7 +46,6 @@ module.exports = function (env) {
         modules: [paths.srcPath, 'node_modules'],
         extensions: ['.js', '.jsx', '.json'],
         fallback: {
-          vm: false,
           crypto: require.resolve('crypto-browserify'),
           stream: require.resolve('stream-browserify'),
           http: require.resolve('stream-http'),
@@ -75,6 +54,7 @@ module.exports = function (env) {
           path: require.resolve('path-browserify'),
           zlib: require.resolve('browserify-zlib')
         },
+        // Fix for using `yarn link 'near-social-vm'`
         alias: {
           react: path.resolve(__dirname, './node_modules/react'),
           'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
@@ -88,24 +68,35 @@ module.exports = function (env) {
           MODE: mode
         }),
         new CleanWebpackPlugin(),
+        // Copies files from target to destination folder
         new CopyWebpackPlugin({
           patterns: [
             {
               from: paths.publicPath,
-              to: 'assets',
+              to: './',
               globOptions: {
-                ignore: ['*.DS_Store']
+                ignore: ['**/*.DS_Store', '**/index.html', '**/favicon.png'],
               },
-              noErrorOnMissing: true
+              noErrorOnMissing: true,
             }
           ]
         }),
-        new HTMLPlugin(env),
+        // new HtmlWebpackPlugin(env),
+        new HTMLWebpackPlugin({
+          template: `${paths.publicPath}/index.html`,
+          publicPath: process.env.PUBLIC_PATH ?? '/',
+          minify: false,
+        }),
+        new HTMLWebpackPlugin({
+          template: `${paths.publicPath}/index.html`,
+          filename: '404.html',
+          publicPath: process.env.PUBLIC_PATH ?? '/',
+          minify: false,
+        }),
         new webpack.ProvidePlugin({
           process: 'process/browser',
           Buffer: [require.resolve('buffer/'), 'Buffer']
         }),
-        new ManifestPlugin.WebpackManifestPlugin()
       ]
     },
     loadConfig(mode),

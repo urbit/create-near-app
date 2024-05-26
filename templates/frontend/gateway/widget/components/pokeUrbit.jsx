@@ -1,5 +1,4 @@
 let { api } = props
-Urbit.setApi(api)
 
 const Label = styled.span`
   font-size: 16px;

@@ -1,8 +1,8 @@
-const path = require('path')
-const { HotModuleReplacementPlugin } = require('webpack')
+const path = require('path');
+const { HotModuleReplacementPlugin } = require('webpack');
 
 module.exports = () => ({
-  devtool: false,
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
@@ -32,23 +32,27 @@ module.exports = () => ({
           },
           {
             // compiles Sass to CSS
-            loader: 'sass-loader'
-          }
-        ]
-      }
-    ]
-  },
-  output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: '[name].bundle.js',
-    publicPath: '/'
+            loader: 'sass-loader',
+            options: {
+              // Prefer `dart-sass`
+              implementation: require('sass'),
+              sassOptions: {
+                quietDeps: true,
+              },
+            },
+          },
+        ],
+      },
+    ],
   },
   devServer: {
     open: true,
     static: path.resolve(__dirname, '../dist'),
     port: 8081,
     compress: true,
-    historyApiFallback: true
+    historyApiFallback: {
+      disableDotRule: true,
+    },
   },
   plugins: [new HotModuleReplacementPlugin()]
 })

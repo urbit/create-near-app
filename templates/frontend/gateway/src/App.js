@@ -1,77 +1,107 @@
-import 'App.scss'
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import 'bootstrap/dist/js/bootstrap.bundle'
-import 'error-polyfill'
-import { useInitNear } from 'near-social-vm'
-import React, { useState, useEffect } from 'react'
-import 'react-bootstrap-typeahead/css/Typeahead.bs5.css'
-import 'react-bootstrap-typeahead/css/Typeahead.css'
+import "App.scss";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "bootstrap/dist/js/bootstrap.bundle";
+import { Widget } from "near-social-vm";
+import React, { useEffect, useMemo } from "react";
+import "react-bootstrap-typeahead/css/Typeahead.css";
+
+import { sanitizeUrl } from "@braintree/sanitize-url";
+import { useAccount, useInitNear } from "near-social-vm";
 import {
-  Route,
-  Redirect,
-  BrowserRouter as Router,
-  Switch
-} from 'react-router-dom'
-import ExamplePage from './pages/ExamplePage'
+  createBrowserRouter,
+  Link,
+  RouterProvider,
+  useLocation,
+} from "react-router-dom";
+import useRedirectMap from "./hooks/useRedirectMap";
+import useUrbitShip from "./hooks/useUrbitShip";
 
-export const refreshAllowanceObj = {}
+function Viewer({ widgetSrc, code, initialProps }) {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const { components: redirectMap } = useRedirectMap();
+  const api = useUrbitShip();
 
-function App(props) {
-  const { initNear } = useInitNear()
-  const [api, setApi] = useState({ ship: '', url: '', code: '' })
+  // create props from params
+  const passProps = useMemo(() => {
+    return Array.from(searchParams.entries()).reduce((props, [key, value]) => {
+      props[key] = value;
+      return props;
+    }, {});
+  }, [location]);
 
-  useEffect(() => {
-    const apiConfig = {}
+  const path = location.pathname.substring(1);
 
-    if (process && process.env.MODE === 'development') {
-      apiConfig.ship = process.env.SHIP
-      apiConfig.url = process.env.URL
-      apiConfig.code = process.env.CODE
-      setApi(apiConfig)
-    } else {
-      apiConfig.url = window.location.origin
+  const src = useMemo(() => {
+    const pathSrc = widgetSrc ?? path;
+    return pathSrc;
+  }, [widgetSrc, path]);
 
-      async function getShip() {
-        const response = await fetch(`${apiConfig.url}/~/name`, {
-          method: 'get',
-          credentials: 'include'
-        })
-        const getStream = await response.text()
-        return getStream.substring(1)
-      }
-
-      getShip().then(ship => {
-        apiConfig.ship = ship
-        setApi(apiConfig)
-      })
-    }
-  }, [])
-
-  useEffect(() => {
-    if (initNear) {
-      initNear({
-        networkId: 'mainnet'
-      })
-    }
-  }, [initNear])
-
-  const passProps = {
-    refreshAllowance: () => refreshAllowance(),
-    api
-  }
-
-  let str = window.location.pathname
-  let before = str.substring(0, str.indexOf(`/gateway`))
   return (
-    <Router basename={`${before}/gateway`}>
-      <Switch>
-        <Redirect exact from="/" to="/example" />
-        <Route path="/example">
-          <ExamplePage {...passProps} />
-        </Route>
-      </Switch>
-    </Router>
-  )
+    <>
+      <Widget
+        src={!code && src}
+        code={code} // prioritize code
+        props={{ ...initialProps, ...passProps, api }}
+        config={{ redirectMap }}
+      />
+    </>
+  );
 }
 
-export default App
+function App(props) {
+  const { src, code, initialProps, rpc, network, selectorPromise } = props;
+  const { initNear } = useInitNear();
+
+  useAccount();
+  useEffect(() => {
+    const config = {
+      networkId: network || "mainnet",
+      selector: selectorPromise,
+      customElements: {
+        Link: (props) => {
+          if (!props.to && props.href) {
+            props.to = props.href;
+            delete props.href;
+          }
+          if (props.to) {
+            props.to = sanitizeUrl(props.to);
+          }
+          return <Link {...props} />;
+        },
+      },
+      features: {
+        enableComponentSrcDataKey: true,
+      },
+      config: {
+        defaultFinality: undefined,
+      },
+    };
+
+    if (rpc) {
+      config.config.nodeUrl = rpc;
+    }
+
+    initNear && initNear(config);
+  }, [initNear, rpc]);
+
+  let pathname = window.location.pathname;
+  let before = pathname.substring(0, pathname.indexOf(`/gateway`));
+
+  const router = createBrowserRouter([
+    {
+      path: "/*",
+      element: (
+        <Viewer widgetSrc={src} code={code} initialProps={initialProps} />
+      ),
+    },
+  ],
+  {
+    basename: `${before}/gateway/` // Why does this need to be here?
+  }
+);
+
+  return <RouterProvider router={router} />;
+}
+
+export default App;
