@@ -10,8 +10,9 @@ import {
   createBrowserRouter,
   Link,
   Navigate,
-  RouterProvider
+  RouterProvider,
 } from "react-router-dom";
+import Viewer from "./Viewer";
 
 function App(props) {
   // Attributes passed from web component
