@@ -6559,7 +6559,7 @@ near-social-vm-types@^1.0.0:
   resolved "https://registry.npmjs.org/near-social-vm-types/-/near-social-vm-types-1.0.0.tgz#721494a863d2c0d64da2a43d80224e4080b690db"
   integrity sha512-K5CxfiiKc7evzFb/1BGBOD2x4QqnEBuVaHkgRsRTGv02ctLkxA/Xf892SornWSkD75Hf0s9j/jeM5PpMfXcM9A==
 
-"near-social-vm@github:urbit/NearSocialVM":
+"near-social-vm@github:urbit/NearSocialVM#main":
   version "2.5.3"
   resolved "https://codeload.github.com/urbit/NearSocialVM/tar.gz/b776105a1b6e1e2dfef817cded19828663c97acc"
   dependencies:
