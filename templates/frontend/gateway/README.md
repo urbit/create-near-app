@@ -70,7 +70,7 @@ Each Widget component has several optional attributes, but for now you only need
 
 ### Writing Urbit-aware NEAR components
 
-This BOS gateway introduces a custom VM element called `<Urbit />`, which is a higher-order component to provide methods you can use to interact with the local ship. To use these methods, you must pass your Urbit-aware JSX to the element's `provide` property: `<Urbit provide={({ poke, scry}) => <>...</>} />`
+This BOS gateway introduces a custom VM element called `<Urbit />`, which is a higher-order component to provide methods you can use to interact with the local ship. To use these methods, you must pass your Urbit-aware JSX to the element's `provides` property: `<Urbit provides={({ poke, scry}) => <>...</>} />`
 
 You can learn and modify the exposed methods in [UrbitProvider](./src/components/UrbitProvider.js).
 

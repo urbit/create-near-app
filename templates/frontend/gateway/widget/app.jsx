@@ -17,7 +17,7 @@ return (
     >
       <div>
         <Urbit
-          provide={({ poke }) => (
+          provides={({ poke }) => (
             <Widget
               src={"${config_account}/widget/components.pokeUrbit"}
               props={{ poke }}
@@ -27,7 +27,7 @@ return (
       </div>
       <div>
         <Urbit
-          provide={({ scry }) => (
+          provides={({ scry }) => (
             <Widget
               src={"${config_account}/widget/components.scryUrbit"}
               props={{ scry }}
