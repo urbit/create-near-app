@@ -1,5 +1,6 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
 const path = require('path')
 
 module.exports = () => {
@@ -14,7 +15,7 @@ module.exports = () => {
       rules: [
         // {
         //   test: /\.(css)$/,
-        //   use: [MiniCssExtractPlugin.loader, "css-loader"],
+        //   use: [MiniCssExtractPlugin.loader, 'css-loader'],
         //   //   options: {
         //   //     sourceMap: false,
         //   //   },
@@ -34,7 +35,7 @@ module.exports = () => {
               // Run postcss actions
               loader: 'postcss-loader',
               options: {
-                // `postcssOptions` is needed for postcss 8.x;
+                // `postcssOptions` is needed for postcss 8.x
                 // if you use postcss 7.x skip the key
                 postcssOptions: {
                   // postcss plugins, can be exported to postcss.config.js
@@ -46,7 +47,14 @@ module.exports = () => {
             },
             {
               // compiles Sass to CSS
-              loader: 'sass-loader'
+              loader: 'sass-loader',
+              options: {
+                // Prefer `dart-sass`
+                implementation: require('sass'),
+                sassOptions: {
+                  quietDeps: true
+                }
+              }
             }
           ]
         }
@@ -60,7 +68,12 @@ module.exports = () => {
     ],
     optimization: {
       minimize: true,
-      minimizer: [new CssMinimizerPlugin(), '...'],
+      minimizer: [
+        new CssMinimizerPlugin(),
+        new TerserPlugin({
+          exclude: /webcomponentapp.js/
+        })
+      ],
       runtimeChunk: {
         name: 'runtime'
       }

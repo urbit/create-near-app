@@ -1,5 +1,4 @@
-let { api } = props
-Urbit.setApi(api)
+let { scry } = props;
 
 const Label = styled.span`
   font-size: 16px;
@@ -62,7 +61,7 @@ const [scryResponse, setScryResponse] = useState('')
 const handleScryButton = (e) => {
   e.preventDefault()
 
-  Urbit.scry(scryApp, scryPath)
+  scry(scryApp, scryPath)
     .then((res) => {
       setScryResponse(JSON.stringify(res))
       setScryApp('')
