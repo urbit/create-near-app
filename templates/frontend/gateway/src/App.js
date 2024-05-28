@@ -13,6 +13,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Viewer from "./Viewer";
+import UrbitProvider from "./components/UrbitProvider";
 
 function App(props) {
   // Attributes passed from web component
@@ -37,6 +38,9 @@ function App(props) {
             props.to = sanitizeUrl(props.to);
           }
           return <Link {...props} />;
+        },
+        Urbit: (props) => {
+          return <UrbitProvider {...props} />;
         },
       },
       features: {

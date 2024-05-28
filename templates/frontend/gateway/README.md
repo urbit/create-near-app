@@ -1,4 +1,4 @@
-This is a [React](https://reactjs.org/) app bootstrapped with [`bos-workspace` widget development environment](https://github.com/nearbuilders/bos-workspace) and an [Urbit-aware NEAR Social VM](https://github.com/urbit/NearSocialVM).
+—> [near-bos-webcomponent](https://github.com/nearbuilders/near-bos-webcomponent) with [Urbit HTTP API](https://developers.urbit.org/guides/additional/http-api-guide) installed, in order to provide a sandbox for builders wanting to create decentralized Urbit apps on BOS.
 
 ## Prerequisites
 
@@ -68,59 +68,67 @@ Each Widget component has several optional attributes, but for now you only need
 - `code` - allows valid, stringified widget code to be passed directly for interpretation and rendering.
 - `props` - an object, allows you to pass props to the component.
 
-
 ### Writing Urbit-aware NEAR components
 
-You’ll [write new components]() in `/widget` folder.
+This BOS gateway introduces a custom VM element called `<Urbit />`, which is a higher-order component to provide methods you can use to interact with the local ship. To use these methods, you must pass your Urbit-aware JSX to the element's `provide` property: `<Urbit provide={({ poke, scry}) => <>...</>} />`
 
-This BOS gateway uses a fork of the NEAR Social VM that includes an [Urbit object](https://docs.urbit.org), and that object has methods you can use to interact with the local ship.
+You can learn and modify the exposed methods in [UrbitProvider](./src/components/UrbitProvider.js).
 
-#### `Urbit.pokeUrbit(app, mark, json)`
+#### `poke(app, mark, json)`
 
 Sends a poke (like a POST request) to the local ship.
 
 This method takes the app you’d like to send a [poke](https://docs.urbit.org/glossary/poke) to, the [mark](https://docs.urbit.org/glossary/mark) that tells the app what kind of poke it is, and a json object with the data you’d like to send.
 
-```javascript
-Urbit.pokeUrbit('hood', 'helm-hi', 'hello urbit!')
-.then(res => {
-  console.log(`${pokeVal} been printed in dojo`)
-})
-
+```jsx
+<Urbit
+  provides={({ poke }) => (
+    <button
+      onClick={() =>
+        poke("hood", "helm-hi", "hello urbit!").then((res) => {
+          console.log(`${pokeVal} been printed in dojo`);
+        })
+      }
+    >
+      poke
+    </button>
+  )}
+/>
 ```
 
 Documentation:
 
-- [pokeUrbit method](https://docs.urbit.org)
+- [poke method](https://docs.urbit.org)
 
 - [Pokes](https://docs.urbit.org/courses/app-school/6-pokes)
 
 - [Marks](https://docs.urbit.org/system/kernel/clay/guides/marks)
 
-#### `Urbit.scryUrbit(app, path)`
+#### `scry(app, path)`
 
 Send a scry (like a GET request) to the local ship.
 
-```
-Urbit.scryUrbit('docket', '/charges')
-  .then(res => {
-    setResponse(res)
-  })
+```jsx
+<Urbit
+  provides={({ scry }) => (
+    <button
+      onClick={() =>
+        scry("docket", "/charges").then((res) => {
+          setResponse(res)
+        })
+      }
+    >
+      scry
+    </button>
+  )}
+/>
 ```
 
 Documentation:
 
-- [scryUrbut method](https://docs.urbit.org)
+- [scry method](https://docs.urbit.org)
 
 - [Scries](https://docs.urbit.org/courses/app-school/10-scry)
-
-#### Development methods
-
-The Urbit object also contains two methods that are useful for development. You should remove these before deploying.
-
-`Urbit.ship(ship)` - Sets the name of the local ship for the VM.
-
-`Urbit.setTestApi(host, code)` - Configures port and access key authentication details for the VM.
 
 ## Learn more about Urbit
 

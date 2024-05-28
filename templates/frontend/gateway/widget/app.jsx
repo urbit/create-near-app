@@ -1,8 +1,6 @@
 /**
  * This is your entry file for the frontend.
  */
-const { api } = props;
-
 return (
   <div>
     <Widget src="${config_account}/widget/components.header" />
@@ -18,15 +16,23 @@ return (
       }}
     >
       <div>
-        <Widget
-          src={"${config_account}/widget/components.pokeUrbit"}
-          props={{ api: api }}
+        <Urbit
+          provide={({ poke }) => (
+            <Widget
+              src={"${config_account}/widget/components.pokeUrbit"}
+              props={{ poke }}
+            />
+          )}
         />
       </div>
       <div>
-        <Widget
-          src={"${config_account}/widget/components.scryUrbit"}
-          props={{ api: api }}
+        <Urbit
+          provide={({ scry }) => (
+            <Widget
+              src={"${config_account}/widget/components.scryUrbit"}
+              props={{ scry }}
+            />
+          )}
         />
       </div>
     </div>

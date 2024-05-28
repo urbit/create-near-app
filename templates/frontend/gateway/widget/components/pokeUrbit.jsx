@@ -1,6 +1,4 @@
-let { api } = props;
-
-Urbit.setApi(api);
+let { poke } = props;
 
 const Label = styled.span`
   font-size: 16px;
@@ -52,7 +50,7 @@ const [pokeJson, setPokeJson] = useState('')
 const [pokeStatus, setPokeStatus] = useState('')
 
 const handlePokeButton = () => {
-  Urbit.poke(
+  poke(
     pokeApp,
     pokeMark,
     pokeJson,
