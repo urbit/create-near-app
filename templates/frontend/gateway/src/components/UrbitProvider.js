@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Urbit from "@urbit/http-api";
 
-function UrbitProvider({ provide }) {
+function UrbitProvider({ provides }) {
   const [api, setApi] = useState(null);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ function UrbitProvider({ provide }) {
         });
     });
   }
-  return <>{provide({ poke, scry })}</>;
+  return <>{provides({ poke, scry })}</>;
 }
 
 export default UrbitProvider;
