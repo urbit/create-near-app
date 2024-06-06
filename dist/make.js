@@ -39,13 +39,8 @@ async function createProject({ frontend, projectPath, templatesDir, projectName 
 exports.createProject = createProject;
 async function createGateway({ frontend, projectPath, templatesDir, projectName }) {
     const sourceFrontendDir = path_1.default.resolve(`${templatesDir}/frontend/gateway`);
-    const sourceWidgetDir = path_1.default.resolve(`${templatesDir}/frontend/components`);
     fs_1.default.mkdirSync(projectPath, { recursive: true });
     await copyDir(sourceFrontendDir, projectPath);
-    //const widgetPath = `${projectPath}/apps/${projectName}`
-    const widgetPath = `${projectPath}/apps`;
-    fs_1.default.mkdirSync(widgetPath, { recursive: true });
-    await copyDir(sourceWidgetDir, widgetPath);
 }
 // Wrap `ncp` tool to wait for the copy to finish when using `await`
 function copyDir(source, dest) {
