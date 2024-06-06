@@ -9,23 +9,24 @@ This is a [React](https://reactjs.org/) app bootstrapped with [`bos-workspace` c
 
 ## Getting started
 
-To run locally, install packages:
+To run locally, install packages using `yarn` or `pnpm`:
 
 ```bash
-yarn
+pnpm install
 ```
 
-Then, run the command:
+Then, run the dev command:
 
 ```bash
-yarn run dev
+pnpm run dev
 ```
 
-This will start a local [bos-workspace](https://github.com/nearbuilders/bos-workspace) to build and serve your local widgets via RPC proxy, and watch for changes to the gateway itself.
+This will start a local [bos-workspace](https://github.com/nearbuilders/bos-workspace) dev server to build and serve your local widgets via RPC proxy with hot reload, and watch for changes to the gateway (React dApp) itself.
 
 If the gateway does not automatically open, go to [http://localhost:8081](http://localhost:8081) with your browser to see the result.
 
 ## Connecting to Urbit
+
 To connect a BOS gateway to your Urbit fakeship,
 specify the credentials in `.env` file.
 
@@ -49,47 +50,31 @@ lidlut-tabwed-pillex-ridrup
 
 ## Project Structure
 
-`/src` - React dApp, gateway itself connected to the [Urbit-aware NEAR Social VM](https://github.com/urbit/NearSocialVM) -- it is prepared as a web component, originally derived from [near-bos-webcomponent](https://github.com/nearbuilders/near-bos-webcomponent).
+`/src` - React dApp, "gateway" connected to the [Urbit-aware NEAR Social VM](https://github.com/urbit/NearSocialVM) -- it is prepared as a web component, originally derived from [near-bos-webcomponent](https://github.com/nearbuilders/near-bos-webcomponent).
 
-`/widget` - bos-workspace directory to hold `Widget` component code. The contents of this directory are built and served, and are automatically hooked up to the gateway via a proxy RPC.
+`/widget` - bos-workspace directory to hold [`Widget`](https://docs.near.org/build/near-components/what-is) code ([NEAR components](https://docs.near.org/build/near-components/what-is)). The contents of this directory are built and served, and are automatically hooked up to the gateway via a proxy RPC. They will be deployed to the social.near and will be accessible via `src`, e.g. "urbitlabs.near/widget/app".
 
-### Importing NEAR components
+## Importing NEAR components
 
 To import local or onchain components into your React dApp `/src` we will use predefined component called `Widget`.
 
-```
+```javascript
 import { Widget } from 'near-social-vm'
-```
-
-If you’re testing local components, you’ll need to import them from `/build/data.json`.
-
-```
-import localComponents from '/../build/data.json'
-
-const Header = localComponents['account.Urbit/widget/components.header']
-
-function Foo() {
-  return (
-    <div>
-      <Widget code={Header.code} />
-    </div>
-  )
-}
 ```
 
 Each Widget component has several optional attributes, but for now you only need to know about three:
 
-- `src` - allows you to include onchain component into your code.
-- `code` - allows you to include local component into your code.
-- `props` - allows you to pass props to component.
+- `src` - references a path to widget code stored on the [near.social contract](https://github.com/NearSocial/social-db), follows the pattern of `${accountId}/widget/${path.to.widget}` -- this allows you to include onchain component in your code.
+- `code` - allows valid, stringified widget code to be passed directly for interpretation and rendering.
+- `props` - an object, allows you to pass props to the component.
 
-### Writing Urbit-aware NEAR components
+## Writing Urbit-aware NEAR components
 
 You’ll [write new components]() in `/apps/widget/components` folder.
 
 This BOS gateway uses a fork of the NEAR Social VM that includes an [Urbit object](https://docs.urbit.org), and that object has methods you can use to interact with the local ship.
 
-#### `Urbit.pokeUrbit(app, mark, json)`
+### `Urbit.pokeUrbit(app, mark, json)`
 
 Sends a poke (like a POST request) to the local ship.
 
@@ -111,7 +96,7 @@ Documentation:
 
 - [Marks](https://docs.urbit.org/system/kernel/clay/guides/marks)
 
-#### `Urbit.scryUrbit(app, path)`
+### `Urbit.scryUrbit(app, path)`
 
 Send a scry (like a GET request) to the local ship.
 
@@ -128,7 +113,7 @@ Documentation:
 
 - [Scries](https://docs.urbit.org/courses/app-school/10-scry)
 
-#### Development methods
+### Development methods
 
 The Urbit object also contains two methods that are useful for development. You should remove these before deploying.
 
@@ -153,7 +138,28 @@ To learn more about NEAR, take a look at the following resources:
 
 ## Deploying
 
+### Widgets
+
 To deploy your widgets to the near.social contract on the NEAR blockchain, follow the [bos-workspace deploy guide](https://github.com/NEARBuilders/bos-workspace?tab=readme-ov-file#deployment) to either deploy via command line, or an automated git workflow.
 
-- [Deploying Component]()
-- [Deploying BOS gateway]()
+In short, the command is:
+
+```cmd
+pnpm run bw deploy
+```
+
+### Gateway
+
+To deploy your gateway, first build the distribution:
+
+```cmd
+pnpm run build
+```
+
+Inside `dist/index.html`, make a modification to the `near-social-viewer` webcomponent to use your root widget src, for example:
+
+```html
+<near-social-viewer src="urbitlabs.near/widget/app"></near-social-viewer>
+```
+
+Then follow the instructions to adding this `dist` to a glob, and uploading this glob to an S3 bucket or some other public-available endpoint.
