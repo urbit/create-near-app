@@ -1,34 +1,33 @@
-This is a [React](https://reactjs.org/) app bootstrapped with [`bos-workspace` component testing environment](https://github.com/urbit/bos-workspace) and [Urbit-aware NEAR Social VM](https://github.com/urbit/NearSocialVM).
+This is a [React](https://reactjs.org/) app bootstrapped with [`bos-workspace` component development environment](https://github.com/nearbuilders/bos-workspace) and [Urbit-aware NEAR Social VM](https://github.com/urbit/NearSocialVM).
 
 ## Prerequisites
 
 - Make sure you have a [current version of Node.js](https://nodejs.org) installed – we are targeting versions `18` for frontend/gateways.
 - Have [Urbit environment setup](https://docs.urbit.org/courses/environment#creating-a-fake-ship) and running Urbit "fakeship".
 
-> We strongly recommend you to follow our [creating your first Urbit-compatible NEAR BOS gateway](https://docs.urbit.org/) if you are new to Urbit or isn’t so familiar with BOS.
+> We strongly recommend you to follow our [creating your first Urbit-compatible NEAR BOS gateway](https://docs.urbit.org/) if you are new to Urbit or aren't so familiar with BOS.
 
-## Getting Started
+## Getting started
 
-First, run the development server:
+To run locally, install packages:
 
-```
-pnpm start
-```
-
-Open [http://localhost:8081](http://localhost:8081) with your browser to see the result.
-
-This gateway is an ideal environment to develop Urbit-aware components to deploy on the NEAR blockchain, or develop an entire Urbit aware BOS gateway.
-
-Build local components run
-
-```
-pnpm run component-build
-#or
-pnpm start
+```bash
+yarn
 ```
 
-To connect BOS gateway to your Urbit fakeship
-specify credentials in `.env` file.
+Then, run the command:
+
+```bash
+yarn run dev
+```
+
+This will start a local [bos-workspace](https://github.com/nearbuilders/bos-workspace) to build and serve your local widgets via RPC proxy, and watch for changes to the gateway itself.
+
+If the gateway does not automatically open, go to [http://localhost:8081](http://localhost:8081) with your browser to see the result.
+
+## Connecting to Urbit
+To connect a BOS gateway to your Urbit fakeship,
+specify the credentials in `.env` file.
 
 ```.env
 # fakeship name without ~
@@ -41,18 +40,18 @@ REACT_APP_HOST=http://localhost:8080
 REACT_APP_CODE=lidlut-tabwed-pillex-ridrup
 ```
 
-Get fakeship access key, run +code command in your fakeship’s dojo (Urbit's command-line application).
+Get the fakeship access key by running the `+code` command in your fakeship’s dojo (Urbit's command-line application).
 
-```
+```cmd
 > +code
 lidlut-tabwed-pillex-ridrup
 ```
 
-### Gateway structure
+## Project Structure
 
-`/src` - React dApp, gateway itself.
+`/src` - React dApp, gateway itself connected to the [Urbit-aware NEAR Social VM](https://github.com/urbit/NearSocialVM) -- it is prepared as a web component, originally derived from [near-bos-webcomponent](https://github.com/nearbuilders/near-bos-webcomponent).
 
-`/apps` - a bos-workspace testing environment for your components.
+`/widget` - bos-workspace directory to hold `Widget` component code. The contents of this directory are built and served, and are automatically hooked up to the gateway via a proxy RPC.
 
 ### Importing NEAR components
 
@@ -96,7 +95,7 @@ Sends a poke (like a POST request) to the local ship.
 
 This method takes the app you’d like to send a [poke](https://docs.urbit.org/glossary/poke) to, the [mark](https://docs.urbit.org/glossary/mark) that tells the app what kind of poke it is, and a json object with the data you’d like to send.
 
-```
+```javascript
 Urbit.pokeUrbit('hood', 'helm-hi', 'hello urbit!')
 .then(res => {
   console.log(`${pokeVal} been printed in dojo`)
@@ -153,6 +152,8 @@ To learn more about NEAR, take a look at the following resources:
 - [You can check out the NEAR repository](https://github.com/near) - your feedback and contributions are welcome!
 
 ## Deploying
+
+To deploy your widgets to the near.social contract on the NEAR blockchain, follow the [bos-workspace deploy guide](https://github.com/NEARBuilders/bos-workspace?tab=readme-ov-file#deployment) to either deploy via command line, or an automated git workflow.
 
 - [Deploying Component]()
 - [Deploying BOS gateway]()

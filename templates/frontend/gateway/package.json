@@ -10,37 +10,34 @@
     "serve": "webpack serve",
     "watch": "npm-watch",
     "webpack": "webpack",
-    "dev": "npm run component-build && npm run serve -- --env mode=development",
+    "bw": "bos-workspace",
+    "dev": "concurrently \"npm run dev:gateway\" \"wait-on dist/index.html && npm run dev:apps\"",
+    "dev:apps": "npm run bw dev -- -p 8081 -g ./dist",
+    "dev:gateway": "npm run webpack -- --env mode=development --watch",
     "prod": "npm run webpack -- --env mode=production",
     "prod:analyze": "npm run prod -- --env presets=analyze",
-    "build": "npm run component-build && npm run prod",
-    "start": "npm run dev",
-    "component-build": "bos-workspace dev"
-  },
-  "watch": {
-    "component-build": [
-      "apps/widget/components/**.*"
-    ]
+    "build": "npm run prod",
+    "start": "npm run dev:gateway && http-server -p 8081 dist --allowed-hosts=all"
   },
   "dependencies": {
+    "@braintree/sanitize-url": "^6.0.2",
+    "@urbit/http-api": "^2.3.0",
     "bootstrap": "^5.3.3",
     "bootstrap-icons": "^1.11.3",
-    "bos-workspace": "github:urbit/bos-workspace",
-    "dompurify": "^3.1.2",
     "dotenv-webpack": "^8.1.0",
     "error-polyfill": "^0.1.3",
-    "npm-watch": "^0.13.0",
     "near-api-js": "^2.1.3",
+    "near-social-vm": "github:urbit/NearSocialVM#main",
+    "near-social-vm-types": "^1.0.0",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.2",
     "react-bootstrap-typeahead": "^6.3.2",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^5.3.4",
+    "react-router-dom": "^6.20.0",
     "sass": "^1.76.0",
     "sass-loader": "^14.2.1",
-    "webpack": "^5.91.0",
-    "@urbit/http-api": "^2.3.0",
-    "near-social-vm": "github:urbit/NearSocialVM"
+    "socket.io-client": "^4.7.5",
+    "webpack": "^5.91.0"
   },
   "eslintConfig": {
     "extends": [
@@ -65,6 +62,7 @@
     "@babel/preset-env": "^7.24.5",
     "@babel/preset-react": "^7.24.1",
     "babel-loader": "^8.3.0",
+    "bos-workspace": "^1.0.0-alpha",
     "browserify-zlib": "^0.2.0",
     "buffer": "^6.0.3",
     "clean-webpack-plugin": "^4.0.0",
@@ -83,6 +81,7 @@
     "stream-http": "^3.2.0",
     "style-loader": "^3.3.4",
     "url": "^0.11.3",
+    "wait-on": "^7.2.0",
     "webpack": "^5.91.0",
     "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^4.10.0",

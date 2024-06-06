@@ -1,77 +1,78 @@
-import 'App.scss'
-import 'bootstrap-icons/font/bootstrap-icons.css'
-import 'bootstrap/dist/js/bootstrap.bundle'
-import 'error-polyfill'
-import { useInitNear } from 'near-social-vm'
-import React, { useState, useEffect } from 'react'
-import 'react-bootstrap-typeahead/css/Typeahead.bs5.css'
-import 'react-bootstrap-typeahead/css/Typeahead.css'
-import {
-  Route,
-  Redirect,
-  BrowserRouter as Router,
-  Switch
-} from 'react-router-dom'
-import ExamplePage from './pages/ExamplePage'
+import "App.scss";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import "bootstrap/dist/js/bootstrap.bundle";
+import React, { useEffect } from "react";
+import "react-bootstrap-typeahead/css/Typeahead.css";
 
-export const refreshAllowanceObj = {}
+import { sanitizeUrl } from "@braintree/sanitize-url";
+import { useAccount, useInitNear } from "near-social-vm";
+import {
+  createBrowserRouter,
+  Link,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
+import Viewer from "./Viewer";
 
 function App(props) {
-  const { initNear } = useInitNear()
-  const [api, setApi] = useState({ ship: '', url: '', code: '' })
+  // Attributes passed from web component
+  const { src, code, initialProps, rpc, network, selectorPromise } = props;
 
+  // Initialize the NEAR connection
+  // and the VM itself
+  const { initNear } = useInitNear();
+
+  useAccount();
   useEffect(() => {
-    const apiConfig = {}
+    const config = {
+      networkId: network || "mainnet",
+      selector: selectorPromise,
+      customElements: {
+        Link: (props) => {
+          if (!props.to && props.href) {
+            props.to = props.href;
+            delete props.href;
+          }
+          if (props.to) {
+            props.to = sanitizeUrl(props.to);
+          }
+          return <Link {...props} />;
+        },
+      },
+      features: {
+        enableComponentSrcDataKey: true, // adds "data-component=${src}" attribute to widgets, helpful for inspect element
+      },
+      config: {
+        defaultFinality: undefined,
+      },
+    };
 
-    if (process && process.env.MODE === 'development') {
-      apiConfig.ship = process.env.SHIP
-      apiConfig.url = process.env.URL
-      apiConfig.code = process.env.CODE
-      setApi(apiConfig)
-    } else {
-      apiConfig.url = window.location.origin
-
-      async function getShip() {
-        const response = await fetch(`${apiConfig.url}/~/name`, {
-          method: 'get',
-          credentials: 'include'
-        })
-        const getStream = await response.text()
-        return getStream.substring(1)
-      }
-
-      getShip().then(ship => {
-        apiConfig.ship = ship
-        setApi(apiConfig)
-      })
+    if (rpc) {
+      config.config.nodeUrl = rpc; // <Widget src="..." /> makes an rpc request for the widget code
+      // this enables us to override this rpc url to use a local, rpc proxy (bos-workspace)
     }
-  }, [])
 
-  useEffect(() => {
-    if (initNear) {
-      initNear({
-        networkId: 'mainnet'
-      })
-    }
-  }, [initNear])
+    initNear && initNear(config);
+  }, [initNear, rpc]);
 
-  const passProps = {
-    refreshAllowance: () => refreshAllowance(),
-    api
-  }
+  // Specific to the Urbit implementation
+  let pathname = window.location.pathname;
+  let before = pathname.substring(0, pathname.indexOf(`/gateway`));
 
-  let str = window.location.pathname
-  let before = str.substring(0, str.indexOf(`/gateway`))
-  return (
-    <Router basename={`${before}/gateway`}>
-      <Switch>
-        <Redirect exact from="/" to="/example" />
-        <Route path="/example">
-          <ExamplePage {...passProps} />
-        </Route>
-      </Switch>
-    </Router>
-  )
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Navigate to="/placeholder/gateway/" />,
+    },
+    {
+      path: `/${before || "placeholder"}/gateway/*`,
+      element: (
+        <Viewer widgetSrc={src} code={code} initialProps={initialProps} />
+      ),
+    },
+  ]);
+
+  return <RouterProvider router={router} />;
 }
 
-export default App
+export default App;
