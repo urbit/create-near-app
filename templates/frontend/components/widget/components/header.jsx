@@ -34,7 +34,13 @@ return (
         style={{ width: '60px', objectFit: 'contain' }}
         src="https://storage.googleapis.com/media.urbit.org/logo/White/~-logo-white-medium.png"
       />
-      <Button>Documentation</Button>
+      <a
+        href="https://docs.urbit.org/tools/near-gateways/bos-gateway#using-the-example-app"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <Button>Documentation</Button>
+      </a>
     </Container>
   </Navbar>
 )
