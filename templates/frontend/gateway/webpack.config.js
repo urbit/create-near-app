@@ -10,8 +10,29 @@ const loadPreset = require('./config/presets/loadPreset')
 const loadConfig = (mode) => require(`./config/webpack.${mode}.js`)(mode)
 const Dotenv = require('dotenv-webpack')
 
+class HTMLPlugin {
+  constructor(env) {
+    this.env = env
+  }
+
+  apply(compiler) {
+    const { mode = 'production' } = this.env || {}
+    const isDevelopment = mode === 'development'
+
+    const htmlPluginOptions = {
+      template: `${paths.publicPath}/index.html`,
+      robots: `${paths.publicPath}/robots.txt`,
+      publicPath: isDevelopment ? '/' : './'
+    }
+
+    const htmlWebpackPlugin = new HTMLWebpackPlugin(htmlPluginOptions)
+    htmlWebpackPlugin.apply(compiler)
+  }
+}
+
 module.exports = function (env) {
   const { mode = 'production' } = env || {}
+
   return merge(
     {
       mode,
@@ -54,7 +75,6 @@ module.exports = function (env) {
           path: require.resolve('path-browserify'),
           zlib: require.resolve('browserify-zlib')
         },
-        // Fix for using `yarn link "near-social-vm"`
         alias: {
           react: path.resolve(__dirname, './node_modules/react'),
           'react-dom': path.resolve(__dirname, './node_modules/react-dom'),
@@ -64,11 +84,10 @@ module.exports = function (env) {
       plugins: [
         new Dotenv(),
         new webpack.EnvironmentPlugin({
-          // Configure environment variables here.
-          ENVIRONMENT: 'browser'
+          ENVIRONMENT: 'browser',
+          MODE: mode
         }),
         new CleanWebpackPlugin(),
-        // Copies files from target to destination folder
         new CopyWebpackPlugin({
           patterns: [
             {
@@ -81,11 +100,7 @@ module.exports = function (env) {
             }
           ]
         }),
-        new HTMLWebpackPlugin({
-          template: `${paths.publicPath}/index.html`,
-          robots: `${paths.publicPath}/robots.txt`,
-          publicPath: '/'
-        }),
+        new HTMLPlugin(env),
         new webpack.ProvidePlugin({
           process: 'process/browser',
           Buffer: [require.resolve('buffer/'), 'Buffer']

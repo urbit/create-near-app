@@ -54,10 +54,16 @@ const namePrompts = {
     initial: 'hello-urbit',
 };
 const npmPrompt = {
+    // type: 'toggle',
+    // name: 'value',
+    // message: chalk`Run {bold {blue 'pnpm install'}} now?`,
+    // initial: true,
+    // active: 'yes',
+    // inactive: 'no'
     type: 'confirm',
     name: 'install',
-    message: (0, chalk_1.default) `Run {bold {blue 'npm install'}} now?`,
-    initial: true,
+    message: (0, chalk_1.default) `Run {bold {blue 'pnpm install'}} now?`,
+    initial: true
 };
 const promptUser = async (prompts) => {
     // Prompt, and exit if user cancels

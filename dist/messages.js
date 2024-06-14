@@ -33,8 +33,7 @@ const successFrontendToText = (frontend) => frontend === 'none'
 exports.successFrontendToText = successFrontendToText;
 const setupSuccess = (projectName, frontend, install) => (0, exports.show)((0, chalk_1.default) `
 {green ======================================================}
-✅  Success! Created '${projectName}',
-)}${(0, exports.successFrontendToText)(frontend)}.
+✅  Success! Created '${projectName}', ${(0, exports.successFrontendToText)(frontend)}.
 {bold {bgYellow {black Next steps}}}:
 ${(0, exports.gatewayInstructions)(projectName, frontend, install)}`);
 exports.setupSuccess = setupSuccess;
@@ -69,6 +68,6 @@ const depsInstall = () => (0, exports.show)((0, chalk_1.default) `
 {green Installing dependencies in a few folders, this might take a while.}
 `);
 exports.depsInstall = depsInstall;
-const depsInstallError = () => (0, exports.show)(chalk_1.default.red('Error installing NEAR project dependencies'));
+const depsInstallError = () => (0, exports.show)((0, chalk_1.default) `{red Error installing NEAR project dependencies!}`);
 exports.depsInstallError = depsInstallError;
 //# sourceMappingURL=messages.js.map

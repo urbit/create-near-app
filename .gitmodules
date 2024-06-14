@@ -1,0 +1,3 @@
+[submodule "templates/frontend/gateway/src/vm"]
+	path = templates/frontend/gateway/src/vm
+	url = https://github.com/urbit/NearSocialVM
