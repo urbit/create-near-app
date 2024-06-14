@@ -1,6 +1,6 @@
 {
   "name": "create-near-app",
-  "version": "6.3.1",
+  "version": "6.4.0",
   "description": "Quickly scaffold your Urbit's dApp on NEAR Blockchain",
   "main": "index.js",
   "engines": {
